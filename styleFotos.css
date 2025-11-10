@@ -1,0 +1,209 @@
+/* === RESETEO Y BASE GENERAL === */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  background: radial-gradient(circle at top, #000 60%, #111);
+  color: #fff;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* === ENCABEZADO HERO === */
+.hero {
+  position: relative;
+  height: 50vh;
+  background: url('img_familia/Fimagen_pc1.jpg') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
+}
+
+.hero-text {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.hero-text h1 {
+  font-size: 2.3rem;
+  margin-bottom: 10px;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+}
+
+.hero-text p {
+  opacity: 0.9;
+  font-size: 1.05rem;
+  margin-bottom: 10px;
+}
+
+/* === BOTÓN VOLVER === */
+.btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 22px;
+  background: linear-gradient(135deg, #ffffffee, #dcdcdc);
+  color: #000;
+  font-weight: 700;
+  border-radius: 28px;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: scale(1.07);
+  box-shadow: 0 8px 18px rgba(255, 255, 255, 0.3);
+}
+
+/* === SECCIÓN GALERÍA === */
+.galeria {
+  padding: 70px 20px 60px;
+  text-align: center;
+  background: linear-gradient(to bottom, #000, #0a0a0a);
+}
+
+.galeria h2 {
+  font-size: 1.8rem;
+  margin-bottom: 45px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #f1f1f1;
+  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+}
+
+/* === GRID DE FOTOS === */
+.fotos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}
+
+.fotos img {
+  width: 100%;
+  max-width: 260px;
+  aspect-ratio: 1 / 1;
+  border-radius: 14px;
+  object-fit: cover;
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(0.9);
+  animation: fadeInUp 0.7s ease forwards;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.fotos img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 30px rgba(255, 255, 255, 0.25);
+  filter: brightness(1.15);
+  z-index: 5;
+}
+
+/* === PIE DE PÁGINA === */
+footer {
+  text-align: center;
+  padding: 25px;
+  background: #0b0b0b;
+  font-size: 0.9rem;
+  color: #aaa;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* === ANIMACIONES === */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* === RESPONSIVE === */
+@media (min-width: 768px) {
+  .hero-text h1 {
+    font-size: 2.6rem;
+  }
+
+  .galeria h2 {
+    font-size: 2rem;
+  }
+
+  .fotos {
+    gap: 28px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .hero {
+    height: 55vh;
+  }
+
+  .fotos img {
+    max-width: 300px;
+  }
+}
+/* === LIGHTBOX === */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  cursor: zoom-out;
+}
+
+.lightbox-img {
+  max-width: 90%;
+  max-height: 85%;
+  border-radius: 10px;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+  animation: zoomIn 0.4s ease;
+}
+
+.cerrar {
+  position: absolute;
+  top: 25px;
+  right: 35px;
+  font-size: 2.5rem;
+  color: #fff;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.2s ease;
+}
+
+.cerrar:hover {
+  transform: scale(1.2);
+}
+
+/* Animación del zoom */
+@keyframes zoomIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
