@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     // Mensajes finales (segundo ciclo)
-const textoArriba = "Te invitamos a pasar un dia inolvidable en el rencuentro familiar el 28-diciembre en nuestra casa a horas 10:00 AM";
+const textoArriba = "Te invitamos a pasar un dia inolvidable en el rencuentro familiar el 27-diciembre en nuestra casa a horas 9:00 AM";
     const textoFinal = "💖 ¡Nos reunimos de nuevo, familia Calizaya! 💖";
 
     // Crear los elementos de texto
