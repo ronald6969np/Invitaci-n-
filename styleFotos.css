@@ -1,4 +1,4 @@
-/* === RESETEO Y BASE GENERAL === */
+/* === BASE === */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,14 +6,14 @@
 }
 
 body {
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
   background: radial-gradient(circle at top, #000 60%, #111);
   color: #fff;
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
 
-/* === ENCABEZADO HERO === */
+/* === HERO === */
 .hero {
   position: relative;
   height: 50vh;
@@ -28,8 +28,9 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(2px);
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px) saturate(180%);
+  -webkit-backdrop-filter: blur(4px) saturate(180%);
 }
 
 .hero-text {
@@ -40,37 +41,46 @@ body {
 }
 
 .hero-text h1 {
-  font-size: 2.3rem;
-  margin-bottom: 10px;
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #ffffff, #d6d6d6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 3px 8px rgba(255, 255, 255, 0.3);
+  margin-bottom: 12px;
 }
 
 .hero-text p {
   opacity: 0.9;
   font-size: 1.05rem;
-  margin-bottom: 10px;
+  margin-bottom: 25px;
+  color: rgba(255,255,255,0.85);
 }
 
 /* === BOTÓN VOLVER === */
-.btn {
+.btn-volver {
   display: inline-block;
-  margin-top: 15px;
-  padding: 10px 22px;
-  background: linear-gradient(135deg, #ffffffee, #dcdcdc);
-  color: #000;
-  font-weight: 700;
-  border-radius: 28px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 25px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 0.95rem;
   text-decoration: none;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px) saturate(180%);
+  -webkit-backdrop-filter: blur(8px) saturate(180%);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
 }
 
-.btn:hover {
-  transform: scale(1.07);
-  box-shadow: 0 8px 18px rgba(255, 255, 255, 0.3);
+.btn-volver:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
 }
 
-/* === SECCIÓN GALERÍA === */
+/* === GALERÍA === */
 .galeria {
   padding: 70px 20px 60px;
   text-align: center;
@@ -78,89 +88,62 @@ body {
 }
 
 .galeria h2 {
-  font-size: 1.8rem;
+  font-size: 1.9rem;
   margin-bottom: 45px;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  color: #f1f1f1;
-  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+  letter-spacing: 1.5px;
+  background: linear-gradient(90deg, #ffffff, #aaaaaa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
 }
 
-/* === GRID DE FOTOS === */
+/* === FOTOS === */
+/* === GRID DE FOTOS (Responsivo) === */
 .fotos {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(2, 1fr); /* 📱 Por defecto: 2 columnas en móvil */
+  gap: 12px;
   justify-items: center;
+  padding: 10px;
 }
 
 .fotos img {
   width: 100%;
-  max-width: 260px;
-  aspect-ratio: 1 / 1;
   border-radius: 14px;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   cursor: pointer;
   opacity: 0;
-  transform: scale(0.9);
-  animation: fadeInUp 0.7s ease forwards;
+  transform: scale(0.95);
+  animation: fadeInUp 0.8s ease forwards;
   transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
+/* Hover suave */
 .fotos img:hover {
-  transform: scale(1.1);
-  box-shadow: 0 12px 30px rgba(255, 255, 255, 0.25);
-  filter: brightness(1.15);
-  z-index: 5;
+  transform: scale(1.06);
+  box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
+  filter: brightness(1.1);
 }
 
-/* === PIE DE PÁGINA === */
-footer {
-  text-align: center;
-  padding: 25px;
-  background: #0b0b0b;
-  font-size: 0.9rem;
-  color: #aaa;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* === ANIMACIONES === */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* === RESPONSIVE === */
-@media (min-width: 768px) {
-  .hero-text h1 {
-    font-size: 2.6rem;
-  }
-
-  .galeria h2 {
-    font-size: 2rem;
-  }
-
+/* === En pantallas medianas (tablets) === */
+@media (min-width: 600px) {
   .fotos {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+}
+
+/* === En pantallas grandes (PC) === */
+@media (min-width: 1024px) {
+  .fotos {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 28px;
   }
 }
 
-@media (min-width: 1200px) {
-  .hero {
-    height: 55vh;
-  }
-
-  .fotos img {
-    max-width: 300px;
-  }
-}
 /* === LIGHTBOX === */
 .lightbox {
   display: none;
@@ -171,13 +154,15 @@ footer {
   align-items: center;
   z-index: 9999;
   cursor: zoom-out;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .lightbox-img {
   max-width: 90%;
   max-height: 85%;
-  border-radius: 10px;
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.25);
   animation: zoomIn 0.4s ease;
 }
 
@@ -196,7 +181,18 @@ footer {
   transform: scale(1.2);
 }
 
-/* Animación del zoom */
+/* === ANIMACIONES === */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 @keyframes zoomIn {
   from {
     transform: scale(0.8);
@@ -205,5 +201,34 @@ footer {
   to {
     transform: scale(1);
     opacity: 1;
+  }
+}
+
+/* === FOOTER === */
+footer {
+  text-align: center;
+  padding: 25px;
+  background: #0b0b0b;
+  font-size: 0.9rem;
+  color: #aaa;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* === RESPONSIVE === */
+@media (min-width: 768px) {
+  .hero-text h1 {
+    font-size: 2.8rem;
+  }
+
+  .galeria h2 {
+    font-size: 2.2rem;
+  }
+
+  .fotos {
+    gap: 28px;
+  }
+
+  .fotos img {
+    max-width: 300px;
   }
 }
