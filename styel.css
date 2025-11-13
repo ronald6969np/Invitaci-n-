@@ -1,366 +1,239 @@
-/* === RESETEO Y BASE === */
-* {
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
+/* === styel.css ===
+   Página principal (index.html)
+   - Tipografía estilo Android (Material-like) para h1 / mensajes
+   - Carrusel, overlay, barra de botones (iPhone look preserved)
+   - Compatible con todos los navegadores (no degradados que oculten texto)
+*/
+
+/* RESETEO / BASE */
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "SF Pro Text", Arial, sans-serif;
+  background:#000;
+  color:#fff;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
 }
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
-  background: #000;
-  color: #fff;
-  overflow-x: hidden;
+/* HERO / CARRUSEL */
+.hero{ position:relative; height:100vh; overflow:hidden; }
+.carousel{ width:100%; height:100%; position:relative; }
+.fade-slide{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  opacity:0; transition:opacity 1.5s ease-in-out, transform 10s linear;
+  transform-origin:center center;
+}
+.fade-slide.active{
+  opacity:1;
+  /* subtle kenburns (works as long animation on active slides) */
+  animation: kenburns 12s ease-in-out forwards;
+}
+@keyframes kenburns {
+  from { transform: scale(1) translateY(0); }
+  to   { transform: scale(1.06) translateY(-1.2%); }
 }
 
-/* === HERO / CARRUSEL === */
-.hero {
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
+.overlay{
+  position:absolute; inset:0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.45));
+  z-index:1;
 }
 
-.carousel {
-  width: 100%;
-  height: 100%;
-  position: relative;
+/* HERO TEXT (ANDROID STYLE) */
+.hero-text{
+  position:absolute;
+  top:34%;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:2;
+  text-align:center;
+  padding:0 16px;
+  width: min(92%, 980px);
 }
 
-.fade-slide {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 1.5s ease-in-out;
+/* H1 - Android premium style */
+.hero-text h1{
+  font-size:2.4rem;
+  line-height:1.08;
+  font-weight:800;
+  color:#FFFFFF;
+  letter-spacing:0.3px;
+  text-shadow:0 3px 18px rgba(0,0,0,0.55);
+  margin:0 0 8px;
+  -webkit-font-smoothing:antialiased;
 }
 
-.fade-slide.active {
-  opacity: 1;
+/* Mensajes sincronizados (Android look) */
+.mensaje-arriba{
+  margin-bottom:14px;
+  font-size:1.02rem;
+  font-weight:400;
+  line-height:1.5;
+  color:#FAFAFA;
+  text-align:center;
+  max-width:760px;
+  padding:0 6px;
+  text-shadow:0 2px 10px rgba(0,0,0,0.4);
 }
 
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(20,20,20,0.6));
-  z-index: 1;
+.mensaje-carrusel{
+  margin-top:12px;
+  font-size:1.45rem;
+  font-weight:700;
+  color:#FFFFFF;
+  letter-spacing:0.4px;
+  text-shadow:0 3px 18px rgba(0,0,0,0.45);
+  opacity:0;
+  transform:translateY(10px);
+  transition: opacity .55s ease, transform .55s ease;
 }
 
-/* === TEXTO CENTRAL === */
-.hero-text {
-  position: absolute;
-  top: 35%;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-  text-align: center;
-  padding: 0 15px;
+/* classes used by JS */
+.fade-in{ opacity:1; transform:translateY(0); }
+.fade-out{ opacity:0; transform:translateY(10px); }
+
+/* Mensaje final (más grande) */
+.mensaje-final{
+  font-size:2rem;
+  font-weight:800;
+  color:#FFFFFF;
+  letter-spacing:0.8px;
+  text-shadow:0 6px 30px rgba(0,0,0,0.6);
+  animation: pulse 2.5s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%,100%{ transform:scale(1); opacity:1; }
+  50%{ transform:scale(1.03); opacity:0.94; }
 }
 
-.hero-text h1 {
-  font-size: 2rem;
-  margin-bottom: 8px;
-  text-shadow: 0 2px 10px rgba(255, 234, 234, 0.6);
+/* BARRA DE BOTONES (estilo iPhone blur) - se mantiene, solo responsive adjustments */
+.barra-botones.ios-style{
+  position:fixed;
+  bottom:35px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:22px;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(14px) saturate(160%);
+  -webkit-backdrop-filter:blur(14px) saturate(160%);
+  border:1px solid rgba(255,255,255,0.12);
+  padding:14px 28px;
+  border-radius:50px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.45);
+  z-index:2000;
+  width:max-content;
 }
 
-/* === TEXTO DINÁMICO DEL CARRUSEL === */
-.mensaje-arriba {
-  margin-bottom: 10px;
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: #fff;
- text-shadow: 0 2px 10px rgba(255, 234, 234, 0.6);
+/* botones generales */
+.barra-botones.ios-style .icon-btn{
+  display:flex; align-items:center; gap:10px;
+  padding:10px 16px; border-radius:40px;
+  color:#fff; font-weight:600; text-decoration:none;
+  transition:all .22s ease;
+  min-width:56px;
 }
 
-.mensaje-carrusel {
-  margin-top: 20px;
-  font-size: 1.1rem;
-  color: #fff;
-  text-shadow: 0 2px 10px rgba(255, 234, 234, 0.6);
-  transition: opacity 0.5s ease;
+/* iconos */
+.barra-botones.ios-style .icon-btn img{
+  width:26px; height:26px; object-fit:contain; filter:drop-shadow(0 0 6px rgba(255,255,255,0.15));
 }
 
-.mensaje-final {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #fafafa;
-  text-shadow: 0 0 25px rgba(239, 228, 228, 0.6);
-  animation: pulse 2s ease-in-out infinite;
+/* specific colors (kept bright) */
+.icon-btn.fotos{ background:linear-gradient(135deg,#FF9F0A,#FFB340); }
+.icon-btn.ubicacion{ background:linear-gradient(135deg,#0A84FF,#007AFF); }
+.icon-btn.confirmar{
+  background:linear-gradient(135deg,#34d058,#28a745);
+  padding:10px 20px;
+  border-radius:30px;
+  position:relative; overflow:hidden;
 }
 
-/* === ANIMACIONES === */
-.fade-in {
-  opacity: 1;
-  transition: opacity 1.5s ease-in;
+/* small shine on confirmar only on larger screens */
+.icon-btn.confirmar::before{
+  content:""; position:absolute; top:0; left:-70%; width:50%; height:100%;
+  background:linear-gradient(120deg, rgba(255,255,255,0.45), rgba(255,255,255,0));
+  transform:skewX(-25deg);
+  opacity:0.35;
+  transition:left 1.6s linear;
 }
-
-.fade-out {
-  opacity: 0;
-  transition: opacity 0.5s ease-out;
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.05); opacity: 0.9; }
-}
-
-/* === EFECTO SUAVE DE ENTRADA === */
-@keyframes fadeZoom {
-  from { opacity: 0; transform: translate(-50%, 10px) scale(0.9); }
-  to { opacity: 1; transform: translate(-50%, 0) scale(1); }
-}
-
-/* === BARRA DE BOTONES ESTILO iPHONE === */
-.barra-botones.ios-style {
+/* === BOTÓN DE MÚSICA (ESTILO IPHONE/ANDROID) === */
+.music-btn {
   position: fixed;
-  bottom: 35px;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 110px;  /* arriba de la barra de botones */
+  right: 20px;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
+  backdrop-filter: blur(8px) saturate(180%);
+  -webkit-backdrop-filter: blur(8px) saturate(180%);
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 22px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(15px) saturate(180%);
-  -webkit-backdrop-filter: blur(15px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  padding: 14px 28px;
-  border-radius: 50px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-  z-index: 2000;
-  animation: fadeZoom 0.8s ease-out forwards;
-  width: max-content;
+  cursor: pointer;
+  z-index: 4000;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  transition: transform .25s ease, background .25s ease;
 }
 
-/* === BOTONES DE LA BARRA === */
-.barra-botones.ios-style .icon-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  border-radius: 50px;
-  padding: 10px 18px;
-  color: #fff;
-  font-weight: 500;
-  font-size: 0.9rem;
-  text-decoration: none;
-  transition: all 0.25s ease;
-  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.15);
+.music-btn img {
+  width: 32px;
+  height: 32px;
+  opacity: 0.85;
+  transition: transform .25s ease, opacity .25s ease;
 }
 
-.barra-botones.ios-style .icon-btn img {
-  width: 25px;
-  height: 25px;
-  object-fit: contain;
-  filter: drop-shadow(0 0 6px rgba(255,255,255,0.2));
-}
-
-/* === COLORES DE LOS BOTONES === */
-.icon-btn.fotos {
-  background: linear-gradient(135deg, #FF9F0A, #FFB340);
-}
-
-.icon-btn.ubicacion {
-  background: linear-gradient(135deg, #0A84FF, #007AFF);
-}
-
-.icon-btn.confirmar {
-  background: linear-gradient(135deg, #34d058, #28a745);
-  padding: 10px 22px;
-  font-weight: 600;
-  position: relative;
-  overflow: hidden;
-}
-
-/* === Efecto brillo en el botón Confirmar === */
-.icon-btn.confirmar::before {
-  content: "";
-  position: absolute;
-  top: 0; left: -75%;
-  width: 50%; height: 100%;
-  background: linear-gradient(120deg, rgba(255,255,255,0.5), rgba(255,255,255,0));
-  transform: skewX(-25deg);
-  animation: shine 4s infinite;
-}
-
-@keyframes shine {
-  0% { left: -75%; }
-  60%,100% { left: 125%; }
-}
-
-.icon-btn.confirmar span {
-  color: #fff;
-}
-
-/* === EFECTOS DE INTERACCIÓN === */
-.icon-btn:hover {
-  transform: scale(1.06);
-  box-shadow: 0 6px 16px rgba(255, 255, 255, 0.25);
-}
-
-.icon-btn:active {
-  transform: scale(0.94);
-}
-
-  
-@media (min-width: 900px) {
-  /* Cambiar la barra para escritorio */
-  .barra-botones.ios-style {
-    bottom: 40px;
-    padding: 14px 30px;
-    gap: 40px;
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 20px;
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
-    transition: all 0.4s ease;
-  }
-
-  /* --- Botones del Dock --- */
-  .barra-botones.ios-style .icon-btn {
-    flex-direction: column;
-    width: 80px;
-    height: 80px;
-    padding: 12px;
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.07);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
-    gap: 6px;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-  }
-
-  .barra-botones.ios-style .icon-btn img {
-    width: 34px;
-    height: 34px;
-    filter: drop-shadow(0 0 8px rgba(255,255,255,0.25));
-  }
-
-  .barra-botones.ios-style .icon-btn span {
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: #f1f1f1;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
-  }
-
-  /* --- Efecto hover tipo dock --- */
-  .barra-botones.ios-style .icon-btn:hover {
-    transform: scale(1.15) translateY(-5px);
-    background: rgba(255, 255, 255, 0.12);
-    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
-    
-  }
-
-  .barra-botones.ios-style .icon-btn:active {
-    transform: scale(1.05) translateY(0);
-  }
-
-  /* --- Adaptar los colores para que se vean más sobrios en PC --- */
-  .icon-btn.fotos {
-    background: linear-gradient(135deg, #ffb457, #ff914d);
-  }
-
-  .icon-btn.ubicacion {
-    background: linear-gradient(135deg, #007aff, #0051c6);
-  }
-
-  .icon-btn.confirmar {
-    background: linear-gradient(135deg, #34d058, #15803d);
-  }
-
-  /* --- Efecto de brillo suave solo al pasar --- */
-  .barra-botones.ios-style .icon-btn.confirmar::before {
-    animation: none;
-  }
-
-  .barra-botones.ios-style .icon-btn.confirmar:hover::before {
-    animation: shine 2s linear infinite;
-  }
-}
-.fade-slide.active {
-  filter: brightness(0.95) blur(0px);
-  animation: fadeblur 10s ease-in-out infinite alternate;
-}
-
-@keyframes fadeblur {
-  0% { filter: brightness(0.95) blur(0px); }
-  100% { filter: brightness(1.05) blur(1.5px); }
-}
-.overlay {
-  background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.4));
-}
-/* === ESTILO DE TEXTOS (Toque iPhone / Apple) === */
-
-/* Texto superior largo (segunda vuelta) */
-.mensaje-arriba {
-  margin-bottom: 18px;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  max-width: 650px;
-  color: rgba(255, 255, 255, 0.9);
-  text-align: center;
-  letter-spacing: 0.4px;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
-  background: linear-gradient(to right, #f5f5f5, #e8e8e8);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: fadeInText 1.5s ease forwards;
-}
-
-/* Mensaje central animado (primer ciclo) */
-.mensaje-carrusel {
-  margin-top: 15px;
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: #ffffff;
-  opacity: 0;
-  text-shadow: 0 3px 15px rgba(255, 255, 255, 0.35);
-  letter-spacing: 0.5px;
-  background: linear-gradient(to right, #ffffff, #d8d8d8);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-/* Versión final (segundo ciclo: “¡Nos reunimos...!”) */
-.mensaje-final {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: #fafafa;
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
-  letter-spacing: 0.8px;
-  background: linear-gradient(135deg, #ffffff, #c8c8c8);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-/* Animación suave de entrada tipo iPhone */
-@keyframes fadeInText {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Pulso elegante del mensaje final */
-@keyframes pulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.04); opacity: 0.9; }
-}
-
-/* Transiciones (coinciden con tu JS fade-in/fade-out) */
-.fade-in {
+/* Animación al reproducir */
+.music-playing img {
+  animation: spin 3s linear infinite;
   opacity: 1;
-  transform: translateY(0);
 }
 
-.fade-out {
-  opacity: 0;
-  transform: translateY(10px);
+@keyframes spin {
+  from { transform: rotate(0); }
+  to { transform: rotate(360deg); }
 }
+
+.music-btn:hover {
+  transform: scale(1.08);
+}
+
+@media (hover:hover){
+  .icon-btn.confirmar:hover::before{ left:120%; transition:left .9s linear; }
+}
+
+/* interaction */
+.icon-btn:hover{ transform:translateY(-4px) scale(1.03); box-shadow:0 10px 30px rgba(0,0,0,0.45); }
+.icon-btn:active{ transform:translateY(0) scale(.96); }
+
+/* RESPONSIVE: desktop dock style */
+@media (min-width:900px){
+  .barra-botones.ios-style{ bottom:50px; padding:16px 34px; gap:30px; border-radius:22px; }
+  .barra-botones.ios-style .icon-btn{ flex-direction:column; width:88px; height:88px; padding:12px; border-radius:18px; }
+  .barra-botones.ios-style .icon-btn img{ width:36px; height:36px; }
+  .barra-botones.ios-style .icon-btn span{ display:block; font-size:.88rem; margin-top:6px; color:#f7f7f7; font-weight:600; }
+  .icon-btn.fotos{ background:linear-gradient(135deg,#ffb457,#ff914d); }
+  .icon-btn.ubicacion{ background:linear-gradient(135deg,#007aff,#0051c6); }
+  .icon-btn.confirmar{ background:linear-gradient(135deg,#34d058,#15803d); }
+  .icon-btn.confirmar::before{ opacity:0; } /* no moving shine by default, only on hover */
+  .barra-botones.ios-style .icon-btn:hover{ transform:scale(1.15) translateY(-6px); background:rgba(255,255,255,0.06); }
+}
+
+/* small screens tweak for spacing */
+@media (max-width:420px){
+  .hero-text{ top:30%; padding:0 12px; }
+  .mensaje-carrusel{ font-size:1.28rem; }
+  .barra-botones.ios-style{ gap:14px; padding:12px 18px; bottom:18px; }
+  .barra-botones.ios-style .icon-btn{ padding:10px 12px; min-width:48px; }
+}
+
+/* Accessibility: focus outline for keyboard */
+.icon-btn:focus{ outline:2px solid rgba(255,255,255,0.18); outline-offset:3px; }
+
+/* tiny utilities used elsewhere */
+.hidden{ display:none !important; }

@@ -78,3 +78,32 @@ const textoArriba = "Te invitamos a pasar un dia inolvidable en el rencuentro fa
     setInterval(tick, 4000);
   }
 });
+// --- BOTÓN DE MÚSICA ---
+document.addEventListener("DOMContentLoaded", () => {
+  const musicBtn = document.getElementById("music-btn");
+  const musicIcon = document.getElementById("music-icon");
+  const bgMusic = document.getElementById("bg-music");
+
+  let isPlaying = false;
+
+  // Volumen suave estilo iPhone
+  bgMusic.volume = 0.35;
+
+  musicBtn.addEventListener("click", () => {
+    if (!isPlaying) {
+      bgMusic.play();
+      isPlaying = true;
+
+      musicBtn.classList.add("music-playing");
+      musicIcon.src = "logos/music_on.png";
+      musicBtn.title = "Pausar música";
+    } else {
+      bgMusic.pause();
+      isPlaying = false;
+
+      musicBtn.classList.remove("music-playing");
+      musicIcon.src = "logos/music_off.png";
+      musicBtn.title = "Reproducir música";
+    }
+  });
+});
