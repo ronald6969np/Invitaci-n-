@@ -1,38 +1,40 @@
 /* === styel.css ===
    Página principal (index.html)
-   - Tipografía estilo Android (Material-like) para h1 / mensajes
-   - Carrusel, overlay, barra de botones (iPhone look preserved)
-   - Compatible con todos los navegadores (no degradados que oculten texto)
+   Tipografía estilo Android + botones estilo iPhone
 */
 
-/* RESETEO / BASE */
+/* RESET */
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html,body{ height:100%; }
 body{
   margin:0;
-  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "SF Pro Text", Arial, sans-serif;
+  font-family: "Roboto", -apple-system, "Segoe UI", Arial, sans-serif;
   background:#000;
   color:#fff;
-  -webkit-font-smoothing:antialiased;
-  text-rendering:optimizeLegibility;
   overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
 }
 
-/* HERO / CARRUSEL */
+
+/* === HERO CARRUSEL === */
 .hero{ position:relative; height:100vh; overflow:hidden; }
 .carousel{ width:100%; height:100%; position:relative; }
+
 .fade-slide{
-  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
-  opacity:0; transition:opacity 1.5s ease-in-out, transform 10s linear;
-  transform-origin:center center;
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover;
+  opacity:0;
+  transition:opacity 1.5s ease-in-out, transform 9s linear;
 }
+
 .fade-slide.active{
-  opacity:1; 
+  opacity:1;
   animation: kenburns 12s ease-in-out forwards;
 }
+
 @keyframes kenburns {
-  from { transform: scale(1) translateY(0); }
-  to   { transform: scale(1.06) translateY(-1.2%); }
+  from { transform: scale(1); }
+  to   { transform: scale(1.06) translateY(-2%); }
 }
 
 .overlay{
@@ -41,40 +43,30 @@ body{
   z-index:1;
 }
 
-/* HERO TEXT (ANDROID STYLE) */
+
+/* === TEXTO PRINCIPAL === */
 .hero-text{
   position:absolute;
   top:34%;
   left:50%;
   transform:translateX(-50%);
-  z-index:2;
   text-align:center;
-  padding:0 16px;
-  width: min(92%, 980px);
+  z-index:2;
+  width:min(90%, 900px);
 }
 
-/* H1 - Android premium style */
 .hero-text h1{
   font-size:2.4rem;
-  line-height:1.08;
   font-weight:800;
-  color:#FFFFFF;
-  letter-spacing:0.3px;
   text-shadow:0 3px 18px rgba(0,0,0,0.55);
   margin:0 0 8px;
-  -webkit-font-smoothing:antialiased;
 }
 
-/* Mensajes sincronizados (Android look) */
 .mensaje-arriba{
   margin-bottom:14px;
   font-size:1.02rem;
-  font-weight:400;
-  line-height:1.5;
-  color:#FAFAFA;
-  text-align:center;
-  max-width:760px;
-  padding:0 6px;
+  line-height:1.45;
+  color:#fafafa;
   text-shadow:0 2px 10px rgba(0,0,0,0.4);
 }
 
@@ -82,160 +74,168 @@ body{
   margin-top:12px;
   font-size:1.45rem;
   font-weight:700;
-  color:#FFFFFF;
-  letter-spacing:0.4px;
-  text-shadow:0 3px 18px rgba(0,0,0,0.45);
   opacity:0;
   transform:translateY(10px);
+  color:#fff;
+  text-shadow:0 3px 18px rgba(0,0,0,0.55);
   transition: opacity .55s ease, transform .55s ease;
 }
 
-/* classes used by JS */
 .fade-in{ opacity:1; transform:translateY(0); }
 .fade-out{ opacity:0; transform:translateY(10px); }
 
-/* Mensaje final (más grande) */
 .mensaje-final{
   font-size:2rem;
   font-weight:800;
-  color:#FFFFFF;
-  letter-spacing:0.8px;
+  letter-spacing:.8px;
   text-shadow:0 6px 30px rgba(0,0,0,0.6);
-  animation: pulse 2.5s ease-in-out infinite;
-}
-@keyframes pulse{
-  0%,100%{ transform:scale(1); opacity:1; }
-  50%{ transform:scale(1.03); opacity:0.94; }
+  animation:pulse 2.4s ease-in-out infinite;
 }
 
-/* BARRA DE BOTONES (estilo iPhone blur) - se mantiene, solo responsive adjustments */
+@keyframes pulse{
+  0%,100%{ transform:scale(1); opacity:1; }
+  50%{ transform:scale(1.03); opacity:.9; }
+}
+
+
+/* === BARRA DE BOTONES === */
 .barra-botones.ios-style{
   position:fixed;
   bottom:35px;
   left:50%;
   transform:translateX(-50%);
   display:flex;
-  gap:22px;
-  background:rgba(255,255,255,0.08);
+  gap:18px;
+
+  background:rgba(255,255,255,0.1);
   backdrop-filter:blur(14px) saturate(160%);
-  -webkit-backdrop-filter:blur(14px) saturate(160%);
-  border:1px solid rgba(255,255,255,0.12);
-  padding:14px 28px;
+  border:1px solid rgba(255,255,255,0.15);
+
+  padding:14px 26px;
   border-radius:50px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.45);
+  box-shadow:0 10px 28px rgba(0,0,0,0.45);
   z-index:2000;
-  width:max-content;
 }
 
-/* botones generales */
+/* Botón pequeño estándar */
 .barra-botones.ios-style .icon-btn{
-  display:flex; align-items:center; gap:10px;
-  padding:10px 16px; border-radius:40px;
-  color:#fff; font-weight:600; text-decoration:none;
-  transition:all .22s ease;
-  min-width:56px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:8px 14px !important;
+
+  width:auto !important;
+  height:auto !important;
+  min-width:fit-content !important;
+  max-width:130px;
+
+  text-decoration:none;
+  color:#fff;
+  border-radius:40px;
+  transition:.20s ease;
 }
 
-/* iconos */
+/* Tamaño CORREGIDO de iconos (evita agrandamiento) */
 .barra-botones.ios-style .icon-btn img{
-  width:26px; height:26px; object-fit:contain; filter:drop-shadow(0 0 6px rgba(255,255,255,0.15));
+  width:26px !important;
+  height:26px !important;
+  object-fit:contain;
+  flex-shrink:0 !important;
+  display:block;
 }
 
-/* specific colors (kept bright) */
+/* COLORES */
 .icon-btn.fotos{ background:linear-gradient(135deg,#FF9F0A,#FFB340); }
 .icon-btn.ubicacion{ background:linear-gradient(135deg,#0A84FF,#007AFF); }
-.icon-btn.confirmar{
-  background:linear-gradient(135deg,#34d058,#28a745);
-  padding:10px 20px;
-  border-radius:30px;
-  position:relative; overflow:hidden;
-}
- 
+.icon-btn.confirmar{ background:linear-gradient(135deg,#34d058,#28a745); padding:8px 20px !important; }
 
-/* === BOTÓN DE MÚSICA (ESTILO IPHONE/ANDROID) === */
-.music-btn {
-  position: fixed;
-  bottom: 110px;   
-  right: 20px;
-  width: 58px;
-  height: 58px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.25);
-  backdrop-filter: blur(8px) saturate(180%);
-  -webkit-backdrop-filter: blur(8px) saturate(180%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  z-index: 4000;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-  transition: transform .25s ease, background .25s ease;
+/* Efectos */
+.icon-btn:hover{
+  transform:translateY(-3px) scale(1.04);
+  box-shadow:0 12px 28px rgba(0,0,0,0.45);
+}
+.icon-btn:active{
+  transform:scale(.96);
 }
 
-.music-btn img {
-  width: 32px;
-  height: 32px;
-  opacity: 0.85;
-  transition: transform .25s ease, opacity .25s ease;
+
+/* === BOTÓN DE MÚSICA === */
+.music-btn{
+  position:fixed;
+  bottom:110px;
+  right:20px;
+  width:58px; height:58px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.12);
+  border:1px solid rgba(255,255,255,0.25);
+  backdrop-filter:blur(8px) saturate(180%);
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer;
+  z-index:4000;
+  transition:.25s ease;
 }
 
-/* Animación al reproducir */
-.music-playing img {
-  animation: spin 3s linear infinite;
-  opacity: 1;
+#music-btn img{
+  width:32px !important;
+  height:32px !important;
+  opacity:.85;
+  transition:.25s ease;
 }
 
-@keyframes spin {
-  from { transform: rotate(0); }
-  to { transform: rotate(360deg); }
+.music-playing img{
+  animation:spin 3s linear infinite;
+  opacity:1;
 }
 
-.music-btn:hover {
-  transform: scale(1.08);
+@keyframes spin{
+  from{ transform:rotate(0); }
+  to{ transform:rotate(360deg); }
 }
 
-@media (hover:hover){
-  .icon-btn.confirmar:hover::before{ left:120%; transition:left .9s linear; }
+
+/* === TOUCH-LAYER (desbloqueo música) === */
+#touch-layer{
+  position:fixed;
+  top:0; left:0; right:0;
+  height:calc(100% - 150px); /* no tapa los botones */
+  background:transparent;
+  z-index:99999;
 }
 
-/* interaction */
-.icon-btn:hover{ transform:translateY(-4px) scale(1.03); box-shadow:0 10px 30px rgba(0,0,0,0.45); }
-.icon-btn:active{ transform:translateY(0) scale(.96); }
 
-/* RESPONSIVE: desktop dock style */
+/* === RESPONSIVE === */
 @media (min-width:900px){
-  .barra-botones.ios-style{ bottom:50px; padding:16px 34px; gap:30px; border-radius:22px; }
-  .barra-botones.ios-style .icon-btn{ flex-direction:column; width:88px; height:88px; padding:12px; border-radius:18px; }
-  .barra-botones.ios-style .icon-btn img{ width:36px; height:36px; }
-  .barra-botones.ios-style .icon-btn span{ display:block; font-size:.88rem; margin-top:6px; color:#f7f7f7; font-weight:600; }
-  .icon-btn.fotos{ background:linear-gradient(135deg,#ffb457,#ff914d); }
-  .icon-btn.ubicacion{ background:linear-gradient(135deg,#007aff,#0051c6); }
-  .icon-btn.confirmar{ background:linear-gradient(135deg,#34d058,#15803d); }
-  .icon-btn.confirmar::before{ opacity:0; } /* no moving shine by default, only on hover */
-  .barra-botones.ios-style .icon-btn:hover{ transform:scale(1.15) translateY(-6px); background:rgba(255,255,255,0.06); }
+  .barra-botones.ios-style{
+    bottom:50px;
+    padding:16px 34px;
+    gap:30px;
+  }
+
+  .barra-botones.ios-style .icon-btn{
+    flex-direction:column;
+    width:88px;
+    height:88px;
+    border-radius:20px !important;
+    padding:14px !important;
+  }
+
+  .barra-botones.ios-style .icon-btn img{
+    width:36px !important;
+    height:36px !important;
+  }
+
+  .barra-botones.ios-style .icon-btn span{
+    margin-top:6px;
+    font-size:.88rem;
+  }
 }
 
-/* small screens tweak for spacing */
 @media (max-width:420px){
-  .hero-text{ top:30%; padding:0 12px; }
+  .hero-text{ top:30%; }
   .mensaje-carrusel{ font-size:1.28rem; }
-  .barra-botones.ios-style{ gap:14px; padding:12px 18px; bottom:18px; }
-  .barra-botones.ios-style .icon-btn{ padding:10px 12px; min-width:48px; }
+  .barra-botones.ios-style{
+    gap:12px;
+    padding:12px 18px;
+    bottom:18px;
+  }
 }
-
-/* Accessibility: focus outline for keyboard */
-.icon-btn:focus{ outline:2px solid rgba(255,255,255,0.18); outline-offset:3px; }
-
-/* tiny utilities used elsewhere */
-.hidden{ display:none !important; }
-#confetti-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  overflow: hidden;
-}
-

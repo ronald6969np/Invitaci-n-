@@ -80,38 +80,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 /*******************************
- *  MÚSICA – CONTROL PERFECTO
+ *  MÚSICA – CONTROL UNIVERSAL
  *******************************/
 document.addEventListener("DOMContentLoaded", () => {
 
   const musicBtn = document.getElementById("music-btn");
   const musicIcon = document.getElementById("music-icon");
   const bgMusic = document.getElementById("bg-music");
+  const touchLayer = document.getElementById("touch-layer");
 
-  let isPlaying = false;        // Estado real
-  let userInteracted = false;   // Para desbloquear sonido
+  let isPlaying = false;
 
   bgMusic.volume = 0.35;
 
 
   /**************************************
-   *  DESBLOQUEAR AUDIO AL TOCAR LA PANTALLA
+   *  DESBLOQUEAR AUDIO — OVERLAY INVISIBLE
    **************************************/
-  function enableMusic() {
-    if (!userInteracted) {
-      userInteracted = true;
+  function unlockAudio() {
+    bgMusic.play().then(() => {
+      isPlaying = true;
+      updateUI();
 
-      bgMusic.play().then(() => {
-        isPlaying = true;
-        updateUI();
-      }).catch(() => {
-        // Si falla, el usuario puede usar el botón normalmente
-      });
-    }
+      // eliminar el overlay para siempre
+      touchLayer.style.display = "none";
+
+    }).catch(() => {
+      // Si falla, igual seguimos con el botón
+      touchLayer.style.display = "none";
+    });
+
+    // Remover listeners
+    touchLayer.removeEventListener("click", unlockAudio);
+    touchLayer.removeEventListener("touchstart", unlockAudio);
   }
 
-  window.addEventListener("click", enableMusic, { once: true });
-  window.addEventListener("touchstart", enableMusic, { once: true });
+  // Detectar el PRIMER toque real
+  touchLayer.addEventListener("click", unlockAudio, { once: true });
+  touchLayer.addEventListener("touchstart", unlockAudio, { once: true });
 
 
 
@@ -120,9 +126,9 @@ document.addEventListener("DOMContentLoaded", () => {
    **************************************/
   musicBtn.addEventListener("click", () => {
 
-    if (!userInteracted) {
-      // Si el usuario pulsa el botón antes de desbloquear audio
-      enableMusic();
+    // Si el audio aún no estaba desbloqueado
+    if (touchLayer.style.display !== "none") {
+      unlockAudio();
       return;
     }
 
@@ -140,17 +146,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /**************************************
-   *  ACTUALIZACIÓN DE ICONO Y ESTILOS
+   *  ACTUALIZAR ICONO Y ESTADO
    **************************************/
   function updateUI() {
     if (isPlaying) {
       musicIcon.src = "logos/musica_on.png";
       musicBtn.classList.add("music-playing");
-      musicBtn.title = "Pausar música";
     } else {
       musicIcon.src = "logos/musica_off.png";
       musicBtn.classList.remove("music-playing");
-      musicBtn.title = "Reproducir música";
     }
   }
 
