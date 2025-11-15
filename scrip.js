@@ -1,109 +1,157 @@
+/*******************************
+ *  CARRUSEL + MENSAJES
+ *******************************/
 document.addEventListener('DOMContentLoaded', () => {
-  // --- Carrusel sincronizado imagen + texto ---
+
   const slides = Array.from(document.querySelectorAll('.fade-slide'));
   const heroText = document.querySelector('.hero-text');
 
   if (slides.length && heroText) {
-    let index = 0;
-    let cycleCount = 0; // cuenta cuántos ciclos completos se han hecho (una vuelta entera)
 
-    // Textos sincronizados con las 3 primeras imágenes
+    let index = 0;
+    let cycleCount = 0;
+
+    // Textos del primer ciclo
     const mensajes = [
       "De la familia Calizaya Aldana",
-      "Para la toda la familia",
+      "Para toda la familia",
       "Preparados para vivir un día inolvidable juntos."
     ];
 
-    // Mensajes finales (segundo ciclo)
-const textoArriba = "Te invitamos a pasar un dia inolvidable en el rencuentro familiar el 27-diciembre en nuestra casa a horas 9:00 AM";
+    // Textos del segundo ciclo
+    const textoArriba = "Te invitamos a pasar un día inolvidable en el reencuentro familiar el 27-diciembre en nuestra casa a horas 9:00 AM";
     const textoFinal = "💖 ¡Nos reunimos de nuevo, familia Calizaya! 💖";
 
-    // Crear los elementos de texto
+    // Crear elementos de texto
     const textoSuperior = document.createElement('p');
     textoSuperior.classList.add('mensaje-arriba');
+
     const textoDinamico = document.createElement('p');
     textoDinamico.classList.add('mensaje-carrusel');
 
     heroText.appendChild(textoSuperior);
     heroText.appendChild(textoDinamico);
 
-    // Mostrar la primera imagen y texto
     slides[0].classList.add('active');
     textoDinamico.textContent = mensajes[0];
     textoDinamico.classList.add('fade-in');
 
-    // --- Función de cambio ---
     const tick = () => {
-      // Quitar la imagen activa y el texto visible
+
       slides[index].classList.remove('active');
       textoDinamico.classList.remove('fade-in');
       textoDinamico.classList.add('fade-out');
 
-      // Avanzar al siguiente índice
       index++;
 
-      // Si llegó al final del carrusel (última imagen)
       if (index >= slides.length) {
         index = 0;
-        cycleCount++; // se completó un ciclo completo
+        cycleCount++;
       }
 
-      // Esperar al fade-out antes de cambiar contenido
       setTimeout(() => {
         slides.forEach(s => s.classList.remove('active'));
         slides[index].classList.add('active');
 
-        // PRIMER ciclo → mostrar los 3 mensajes normales
+        // Evento para activar música
+        document.dispatchEvent(new Event("cambioImagenCarrusel"));
+
         if (cycleCount === 0) {
           textoSuperior.textContent = "";
           textoDinamico.textContent = mensajes[index];
           textoDinamico.classList.remove('mensaje-final');
-        }
 
-        // SEGUNDO ciclo → mostrar los mensajes finales
-        if (cycleCount >= 1) {
+        } else {
           textoSuperior.textContent = textoArriba;
           textoDinamico.textContent = textoFinal;
           textoDinamico.classList.add('mensaje-final');
         }
 
-        // Aplicar el fade-in del texto
         textoDinamico.classList.remove('fade-out');
         textoDinamico.classList.add('fade-in');
-      }, 500); // duración del fade-out antes de cambiar
 
+      }, 500);
     };
 
-    // Cambiar cada 4 segundos
     setInterval(tick, 4000);
   }
+
 });
-// --- BOTÓN DE MÚSICA ---
+
+
+/*******************************
+ *  MÚSICA – CONTROL PERFECTO
+ *******************************/
 document.addEventListener("DOMContentLoaded", () => {
+
   const musicBtn = document.getElementById("music-btn");
   const musicIcon = document.getElementById("music-icon");
   const bgMusic = document.getElementById("bg-music");
 
-  let isPlaying = false;
+  let isPlaying = false;        // Estado real
+  let userInteracted = false;   // Para desbloquear sonido
 
-  // Volumen suave estilo iPhone
   bgMusic.volume = 0.35;
 
-  musicBtn.addEventListener("click", () => {
-    if (!isPlaying) {
-      bgMusic.play();
-      isPlaying = true;
 
-      musicBtn.classList.add("music-playing");
-      musicIcon.src = "logos/music_on.png";
-      musicBtn.title = "Pausar música";
-    } else {
+  /**************************************
+   *  DESBLOQUEAR AUDIO AL TOCAR LA PANTALLA
+   **************************************/
+  function enableMusic() {
+    if (!userInteracted) {
+      userInteracted = true;
+
+      bgMusic.play().then(() => {
+        isPlaying = true;
+        updateUI();
+      }).catch(() => {
+        // Si falla, el usuario puede usar el botón normalmente
+      });
+    }
+  }
+
+  window.addEventListener("click", enableMusic, { once: true });
+  window.addEventListener("touchstart", enableMusic, { once: true });
+
+
+
+  /**************************************
+   *  BOTÓN DE REPRODUCIR/PAUSAR
+   **************************************/
+  musicBtn.addEventListener("click", () => {
+
+    if (!userInteracted) {
+      // Si el usuario pulsa el botón antes de desbloquear audio
+      enableMusic();
+      return;
+    }
+
+    if (isPlaying) {
       bgMusic.pause();
       isPlaying = false;
+    } else {
+      bgMusic.play();
+      isPlaying = true;
+    }
 
+    updateUI();
+  });
+
+
+
+  /**************************************
+   *  ACTUALIZACIÓN DE ICONO Y ESTILOS
+   **************************************/
+  function updateUI() {
+    if (isPlaying) {
+      musicIcon.src = "logos/musica_on.png";
+      musicBtn.classList.add("music-playing");
+      musicBtn.title = "Pausar música";
+    } else {
+      musicIcon.src = "logos/musica_off.png";
       musicBtn.classList.remove("music-playing");
-      musicIcon.src = "logos/music_off.png";
       musicBtn.title = "Reproducir música";
     }
-  });
+  }
+
 });
