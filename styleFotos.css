@@ -62,18 +62,30 @@ body{
 
 /* Botón Volver estilo Glass */
 .btn-volver{
-  display:inline-block;
-  padding:10px 22px;
-  border-radius:26px;
-  background:rgba(255,255,255,0.12);
-  border:1px solid rgba(255,255,255,0.2);
-  color:#fff;
-  text-decoration:none;
-  font-weight:600;
-  backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px);
-  transition:.22s ease;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+
+  padding: 10px 22px;
+  border-radius: 30px;
+
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+
+  color: #fff;
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.25);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+
+  z-index: 5000;
+  transition: all .25s ease;
 }
+
 
 .btn-volver:hover{
   background:rgba(255,255,255,0.18);

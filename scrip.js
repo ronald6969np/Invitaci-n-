@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let isPlaying = false;
 
-  bgMusic.volume = 0.35;
+  bgMusic.volume = 0.50;
 
 
   /**************************************
@@ -159,3 +159,4 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 });
+

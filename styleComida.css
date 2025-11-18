@@ -1,0 +1,202 @@
+/* === styleComida.css ===
+   Página de comida especial
+   Estilo cálido, elegante, tipo menú moderno
+*/
+
+/* RESET */
+* {
+  margin:0; padding:0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Poppins", "Roboto", Arial, sans-serif;
+  background: #fff7ef; /* tono cálido */
+  color: #4b2e1a;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* === HERO === */
+.hero {
+  position: relative;
+  height: 48vh;
+  background: url('comida/chancho1.jpg') center/cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,0.45);
+}
+
+.hero-text {
+  position:relative;
+  z-index:3;
+  text-align:center;
+  color:#fff;
+  padding:0 20px;
+}
+
+.hero-text h1 {
+  font-size:2.4rem;
+  font-weight:800;
+  text-shadow:0 4px 12px rgba(0,0,0,0.6);
+}
+
+.hero-text p {
+  margin-top:6px;
+  font-size:1.1rem;
+  opacity:0.95;
+}
+
+/* === BOTÓN VOLVER === */
+/* BOTÓN VOLVER FLOTANTE SUPERIOR */
+.btn-volver{
+  position: fixed;
+  top: 20px;
+  left: 20px;
+
+  padding: 10px 22px;
+  border-radius: 30px;
+
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+
+  color: #fff;
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.25);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+
+  z-index: 5000;
+  transition: all .25s ease;
+}
+
+.btn-volver:hover{
+  transform: scale(1.07);
+  background: rgba(255,255,255,0.28);
+}
+
+
+/* === SECCIÓN COMIDA === */
+.comida {
+  padding:50px 20px 80px;
+  text-align:center;
+}
+
+/* Títulos tipo restaurante */
+.comida h2 {
+  font-size:2rem;
+  font-weight:800;
+  color:#8b4513;
+  margin:32px 0 22px;
+  text-shadow:0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* === GALERÍAS === */
+
+.desayuno-fotos,
+.almuerzo-fotos,
+.bebidas-fotos {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;      /* ⭐ CENTRA LAS FOTOS */
+  gap:22px;
+  margin-bottom:28px;
+}
+
+/* Imágenes del menú */
+.desayuno-fotos img,
+.almuerzo-fotos img,
+.bebidas-fotos img {
+  width: 100%;
+  max-width: 380px;  /* ⭐ tamaño perfecto para PC */
+  border-radius:16px;
+  object-fit:cover;
+
+  box-shadow:0 6px 20px rgba(0,0,0,0.2);
+  cursor:pointer;
+
+  opacity:0;
+  transform: translateY(20px) scale(.95);
+  animation: fadeInUp .7s ease forwards;
+
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.desayuno-fotos img:hover,
+.almuerzo-fotos img:hover,
+.bebidas-fotos img:hover {
+  transform: scale(1.05);
+  box-shadow:0 12px 30px rgba(0,0,0,0.25);
+}
+
+/* Animación suave */
+@keyframes fadeInUp {
+  to {
+    opacity:1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* === LIGHTBOX === */
+.lightbox {
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.85);
+  backdrop-filter:blur(6px);
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+
+.lightbox-img {
+  max-width:90%;
+  max-height:85%;
+  border-radius:14px;
+  box-shadow:0 0 32px rgba(255,255,255,0.25);
+  animation: zoomIn .3s ease;
+}
+
+@keyframes zoomIn{
+  from { transform:scale(.8); opacity:0;}
+  to   { transform:scale(1); opacity:1;}
+}
+
+.cerrar {
+  position:absolute;
+  top:22px;
+  right:30px;
+  font-size:2.6rem;
+  color:#fff;
+  cursor:pointer;
+  transition:.22s ease;
+}
+.cerrar:hover {
+  transform:scale(1.12);
+}
+
+/* === RESPONSIVE === */
+@media (max-width:450px) {
+  .hero-text h1 { font-size:2rem; }
+  .comida h2 { font-size:1.7rem; }
+  .btn-volver { font-size:0.9rem; }
+}
+.overlay{
+  position:absolute; inset:0;
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,0.15), rgba(0,0,0,0.45)),
+    rgba(0,0,0,0.25);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index:1;
+}

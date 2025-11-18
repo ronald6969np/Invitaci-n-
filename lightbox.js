@@ -1,21 +1,41 @@
-// === LIGHTBOX SIMPLE ===
-document.addEventListener('DOMContentLoaded', () => {
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.querySelector('.lightbox-img');
-  const cerrar = document.querySelector('.cerrar');
-  const fotos = document.querySelectorAll('.fotos img');
+document.addEventListener("DOMContentLoaded", () => {
 
-  fotos.forEach(img => {
-    img.addEventListener('click', () => {
-      lightbox.style.display = 'flex';
+  // Selecciona el lightbox y sus elementos
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.querySelector(".lightbox-img");
+  const cerrar = document.querySelector(".cerrar");
+
+  // Selecciona TODAS las imágenes de la galería actual
+  const imagenes = document.querySelectorAll(
+    ".fotos img, .desayuno-fotos img, .almuerzo-fotos img, .bebidas-fotos img"
+  );
+
+  if (!lightbox || !lightboxImg || !imagenes.length) {
+    console.warn("Lightbox: No se encontraron imágenes o elementos necesarios.");
+    return;
+  }
+
+  // Abrir lightbox al hacer clic en una imagen
+  imagenes.forEach(img => {
+    img.addEventListener("click", () => {
+      lightbox.style.display = "flex";
       lightboxImg.src = img.src;
+      document.body.style.overflow = "hidden"; // bloquea scroll de fondo
     });
   });
 
-  // Cerrar al hacer clic o presionar "Esc"
-  lightbox.addEventListener('click', () => lightbox.style.display = 'none');
-  cerrar.addEventListener('click', () => lightbox.style.display = 'none');
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') lightbox.style.display = 'none';
+  // Cerrar con botón ✖
+  cerrar.addEventListener("click", () => {
+    lightbox.style.display = "none";
+    document.body.style.overflow = "auto";
   });
+
+  // Cerrar haciendo clic fuera de la imagen
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) {
+      lightbox.style.display = "none";
+      document.body.style.overflow = "auto";
+    }
+  });
+
 });
