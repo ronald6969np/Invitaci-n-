@@ -4,276 +4,338 @@
 */
 
 /* RESET */
-* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-html,body{ height:100%; }
-body{
-  margin:0;
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
   font-family: "Roboto", -apple-system, "Segoe UI", Arial, sans-serif;
-  background:#000;
-  color:#fff;
-  overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
+  background: #000;
+  color: #fff;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 
 /* === HERO CARRUSEL === */
-.hero{ position:relative; height:100vh; overflow:hidden; }
-.carousel{ width:100%; height:100%; position:relative; }
-
-.fade-slide{
-  position:absolute; inset:0; width:100%; height:100%;
-  object-fit:cover;
-  opacity:0;
-  transition:opacity 1.5s ease-in-out, transform 9s linear;
+.hero {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
 }
 
-.fade-slide.active{
-  opacity:1;
+.carousel {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.fade-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out, transform 9s linear;
+}
+
+.fade-slide.active {
+  opacity: 1;
   animation: kenburns 12s ease-in-out forwards;
 }
 
 @keyframes kenburns {
-  from { transform: scale(1); }
-  to   { transform: scale(1.06) translateY(-2%); }
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.06) translateY(-2%);
+  }
 }
 
-.overlay{
-  position:absolute; inset:0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.45));
-  z-index:1;
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.45));
+  z-index: 1;
 }
 
 
 /* === TEXTO PRINCIPAL === */
-.hero-text{
-  position:absolute;
-  top:34%;
-  left:50%;
-  transform:translateX(-50%);
-  text-align:center;
-  z-index:2;
-  width:min(90%, 900px);
+.hero-text {
+  position: absolute;
+  top: 34%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 2;
+  width: min(90%, 900px);
 }
 
-.hero-text h1{
-  font-size:2.4rem;
-  font-weight:800;
-  text-shadow:0 3px 18px rgba(0,0,0,0.55);
-  margin:0 0 8px;
+.hero-text h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  text-shadow: 0 3px 18px rgba(0, 0, 0, 0.55);
+  margin: 0 0 8px;
 }
 
-.mensaje-arriba{
-  margin-bottom:14px;
-  font-size:1.02rem;
-  line-height:1.45;
-  color:#fafafa;
-  text-shadow:0 2px 10px rgba(0,0,0,0.4);
+.mensaje-arriba {
+  margin-bottom: 14px;
+  font-size: 1.02rem;
+  line-height: 1.45;
+  color: #fafafa;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
 }
 
-.mensaje-carrusel{
-  margin-top:12px;
-  font-size:1.45rem;
-  font-weight:700;
-  opacity:0;
-  transform:translateY(10px);
-  color:#fff;
-  text-shadow:0 3px 18px rgba(0,0,0,0.55);
+.mensaje-carrusel {
+  margin-top: 12px;
+  font-size: 1.45rem;
+  font-weight: 700;
+  opacity: 0;
+  transform: translateY(10px);
+  color: #fff;
+  text-shadow: 0 3px 18px rgba(0, 0, 0, 0.55);
   transition: opacity .55s ease, transform .55s ease;
 }
 
-.fade-in{ opacity:1; transform:translateY(0); }
-.fade-out{ opacity:0; transform:translateY(10px); }
-
-.mensaje-final{
-  font-size:2rem;
-  font-weight:800;
-  letter-spacing:.8px;
-  text-shadow:0 6px 30px rgba(0,0,0,0.6);
-  animation:pulse 2.4s ease-in-out infinite;
+.fade-in {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-@keyframes pulse{
-  0%,100%{ transform:scale(1); opacity:1; }
-  50%{ transform:scale(1.03); opacity:.9; }
+.fade-out {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.mensaje-final {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: .8px;
+  text-shadow: 0 6px 30px rgba(0, 0, 0, 0.6);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.03);
+    opacity: .9;
+  }
 }
 
 
 /* ===========================================================
      BARRA ESTILO iPHONE 16 (Premium)
    =========================================================== */
-.barra-dock{
-  position:fixed;
-  bottom:22px;
-  left:50%;
-  transform:translateX(-50%);
-  display:flex;
-  gap:34px;
+.barra-dock {
+  position: fixed;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 34px;
 
-  padding:16px 28px;
-  background:rgba(255,255,255,0.10);
-  backdrop-filter:blur(18px) saturate(180%);
-  -webkit-backdrop-filter:blur(18px) saturate(180%);
+  padding: 16px 28px;
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
 
-  border:1px solid rgba(255,255,255,0.18);
-  border-radius:32px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 32px;
 
-  box-shadow:0 12px 30px rgba(0,0,0,0.45);
-  z-index:3000;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  z-index: 3000;
 
-  width:fit-content;
-  max-width:92vw;
+  width: fit-content;
+  max-width: 92vw;
 }
 
 /* Botón tipo app */
-.dock-btn{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
+.dock-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-  text-decoration:none;
-  color:#fff;
-  font-size:.78rem;
-  font-weight:600;
+  text-decoration: none;
+  color: #fff;
+  font-size: .78rem;
+  font-weight: 600;
 
-  width:74px;
+  width: 74px;
 }
 
 /* Ícono dentro de tarjeta */
-.dock-icon{
-  width:58px;
-  height:58px;
-  border-radius:18px;
+.dock-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  margin-bottom:6px;
+  margin-bottom: 6px;
 
-  box-shadow:0 8px 26px rgba(0,0,0,0.45);
-  transition:.25s ease;
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.45);
+  transition: .25s ease;
 }
 
 /* Iconos */
-.dock-icon img{
-  width:32px;
-  height:32px;
-  object-fit:contain;
+.dock-icon img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
 }
 
 /* Degradados Premium */
-.dock-icon.fotos{
-  background:linear-gradient(145deg,#FF8A00,#FFB548);
+.dock-icon.fotos {
+  background: linear-gradient(145deg, #FF8A00, #FFB548);
 }
 
-.dock-icon.ubicacion{
-  background:linear-gradient(145deg,#0A84FF,#005BEA);
+.dock-icon.ubicacion {
+  background: linear-gradient(145deg, #0A84FF, #005BEA);
 }
 
-.dock-icon.confirmar{
-  background:linear-gradient(145deg,#28D146,#22A63F);
+.dock-icon.confirmar {
+  background: linear-gradient(145deg, #28D146, #22A63F);
 }
-.dock-icon.comida{
-  background:linear-gradient(145deg,#FF3B30,#FF6A5A);
+
+.dock-icon.comida {
+  background: linear-gradient(145deg, #FF3B30, #FF6A5A);
 }
+
 /* Hover animado tipo iOS */
-.dock-btn:hover .dock-icon{
-  transform:translateY(-4px) scale(1.08);
-  box-shadow:0 14px 34px rgba(0,0,0,0.55);
+.dock-btn:hover .dock-icon {
+  transform: translateY(-4px) scale(1.08);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.55);
 }
 
-.dock-btn:active .dock-icon{
-  transform:scale(.92);
+.dock-btn:active .dock-icon {
+  transform: scale(.92);
 }
- 
+
 
 /* === BOTÓN DE MÚSICA === */
-.music-btn{
-  position:fixed;
+.music-btn {
+  position: fixed;
   bottom: 600px;
-  right:20px;
-  width:58px; height:58px;
-  border-radius:50%;
-  background:rgba(255,255,255,0.12);
-  border:1px solid rgba(255,255,255,0.25);
-  backdrop-filter:blur(8px) saturate(180%);
-  display:flex; align-items:center; justify-content:center;
-  cursor:pointer;
-  z-index:4000;
-  transition:.25s ease;
+  right: 20px;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px) saturate(180%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 4000;
+  transition: .25s ease;
 }
 
-#music-btn img{
-  width:32px !important;
-  height:32px !important;
-  opacity:.85;
-  transition:.25s ease;
+#music-btn img {
+  width: 32px !important;
+  height: 32px !important;
+  opacity: .85;
+  transition: .25s ease;
 }
 
-.music-playing img{
-  animation:spin 3s linear infinite;
-  opacity:1;
+.music-playing img {
+  animation: spin 3s linear infinite;
+  opacity: 1;
 }
 
-@keyframes spin{
-  from{ transform:rotate(0); }
-  to{ transform:rotate(360deg); }
+@keyframes spin {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 
 /* === TOUCH-LAYER (desbloqueo música) === */
-#touch-layer{
-  position:fixed;
-  top:0; left:0; right:0;
-  height:calc(100% - 150px);
-  background:transparent;
-  z-index:99999;
+#touch-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: calc(100% - 150px);
+  background: transparent;
+  z-index: 99999;
 }
 
 
 /* === RESPONSIVE === */
-@media (max-width:420px){
-  .hero-text{ top:30%; }
-  .mensaje-carrusel{ font-size:1.28rem; }
-
-  .barra-dock{
-    gap:20px;
-    padding:12px 22px;
+@media (max-width:420px) {
+  .hero-text {
+    top: 30%;
   }
 
-  .dock-btn{
-    width:68px;
-  }
-  
-  .dock-icon{
-    width:54px;
-    height:54px;
-    border-radius:16px;
+  .mensaje-carrusel {
+    font-size: 1.28rem;
   }
 
-  .dock-icon img{
-    width:28px;
-    height:28px;
+  .barra-dock {
+    gap: 20px;
+    padding: 12px 22px;
+  }
+
+  .dock-btn {
+    width: 68px;
+  }
+
+  .dock-icon {
+    width: 54px;
+    height: 54px;
+    border-radius: 16px;
+  }
+
+  .dock-icon img {
+    width: 28px;
+    height: 28px;
   }
 }
 
-@media (min-width:900px){
-  .barra-dock{
-    bottom:40px;
-    padding:18px 36px;
-    gap:38px;
+@media (min-width:900px) {
+  .barra-dock {
+    bottom: 40px;
+    padding: 18px 36px;
+    gap: 38px;
   }
-  .music-btn{
-    bottom: unset;     /* delete mobile position */
+
+  .music-btn {
+    bottom: unset;
+    /* delete mobile position */
     right: 24px;
-    top: 24px;         /* posición superior */
+    top: 24px;
+    /* posición superior */
     width: 48px;
     height: 48px;
     border-radius: 50%;
 
-    background: rgba(255,255,255,0.12);
-    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(10px) saturate(180%);
     -webkit-backdrop-filter: blur(10px) saturate(180%);
 
@@ -281,34 +343,36 @@ body{
     justify-content: center;
     align-items: center;
 
-    box-shadow: 0 6px 24px rgba(0,0,0,0.35);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
     cursor: pointer;
     z-index: 4500;
     transition: .25s ease;
   }
-   .music-btn img{
+
+  .music-btn img {
     width: 26px !important;
     height: 26px !important;
     opacity: 0.95;
     transition: .25s ease;
   }
 
-  .music-btn:hover{
+  .music-btn:hover {
     transform: scale(1.1);
-    background: rgba(255,255,255,0.20);
-  }
-  .dock-btn{
-    width:80px;
-    font-size:.85rem;
+    background: rgba(255, 255, 255, 0.20);
   }
 
-  .dock-icon{
-    width:66px;
-    height:66px;
+  .dock-btn {
+    width: 80px;
+    font-size: .85rem;
   }
 
-  .dock-icon img{
-    width:38px;
-    height:38px;
+  .dock-icon {
+    width: 66px;
+    height: 66px;
+  }
+
+  .dock-icon img {
+    width: 38px;
+    height: 38px;
   }
 }

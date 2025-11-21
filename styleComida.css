@@ -97,6 +97,38 @@ body {
   gap:22px;
   margin-bottom:28px;
 }
+/* === BOTÓN DE MÚSICA === */
+.music-btn{
+  position:fixed;
+  bottom:110px;
+  right:20px;
+  width:58px; height:58px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.15);
+  border:1px solid rgba(255,255,255,0.25);
+  backdrop-filter:blur(8px) saturate(180%);
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer;
+  z-index:4000;
+  transition:.25s ease;
+}
+
+.music-btn img{
+  width:32px;
+  height:32px;
+  opacity:.85;
+  transition:.25s ease;
+}
+
+.music-playing img{
+  animation: spin 3s linear infinite;
+  opacity:1;
+}
+
+@keyframes spin{
+  from{ transform:rotate(0); }
+  to{ transform:rotate(360deg); }
+}
 
 /* Imágenes del menú */
 .desayuno-fotos img,

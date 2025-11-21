@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Invitación Familiar</title>
   <link rel="stylesheet" href="styel.css" />
 </head>
+
 <body>
 
   <!-- Capa para activar música en móviles -->
@@ -35,7 +37,6 @@
         <source srcset="img_familia/Fimagen_pc3.jpg" media="(min-width: 769px)">
         <img src="img_familia/Fimagen_pc3.jpg" class="fade-slide" alt="Familia 3">
       </picture>
-      
 
     </div>
 
@@ -58,12 +59,15 @@
       </div>
       <span>Recuerdos</span>
     </a>
-    <!-- comida -->
+
+    <!-- Comida -->
     <a class="dock-btn" href="comida.html">
       <div class="dock-icon comida">
         <img src="logos/comida.png" alt="Comida">
       </div>
       <span>Comida</span>
+    </a>
+
     <!-- Ubicación -->
     <a class="dock-btn" href="https://maps.app.goo.gl/gshY7yg1HGjy24a77" target="_blank">
       <div class="dock-icon ubicacion">
@@ -73,15 +77,12 @@
     </a>
 
     <!-- Confirmar -->
-    <a class="dock-btn"
-       href="https://wa.me/59174410249?text=Hola!%20👋%20Confirmo%20mi%20asistencia"
-       target="_blank">
+    <a class="dock-btn" href="https://wa.me/59174410249?text=Hola!%20👋%20Confirmo%20mi%20asistencia" target="_blank">
       <div class="dock-icon confirmar">
         <img src="logos/whatsapp.png" alt="Confirmar">
       </div>
       <span>Confirmar</span>
     </a>
-    
 
   </div>
 
@@ -90,14 +91,16 @@
   <div id="music-btn" class="music-btn">
     <img id="music-icon" src="logos/musica_off.png" alt="Music">
   </div>
-   
-  <!-- AUDIO -->
+
+  <!-- AUDIO GLOBAL -->
   <audio id="bg-music" preload="auto">
     <source src="musica/music_necesito_un_vino.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- SCRIPTS -->
+  <!-- Scripts -->
+  <script src="musc.js"></script>
   <script src="scrip.js"></script>
 
 </body>
+
 </html>
