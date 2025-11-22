@@ -70,7 +70,12 @@ body {
 }
 
 
-/* === TEXTO PRINCIPAL === */
+
+
+
+
+
+/* ===  TEXTO PRINCIPAL === */
 .hero-text {
   position: absolute;
   top: 34%;
@@ -140,9 +145,8 @@ body {
 }
 
 
-/* ===========================================================
-     BARRA ESTILO iPHONE 16 (Premium)
-   =========================================================== */
+
+/* === BARRA===*/
 .barra-dock {
   position: fixed;
   bottom: 22px;
@@ -204,7 +208,7 @@ body {
   object-fit: contain;
 }
 
-/* Degradados Premium */
+/* Degradados*/
 .dock-icon.fotos {
   background: linear-gradient(145deg, #FF8A00, #FFB548);
 }
@@ -221,7 +225,7 @@ body {
   background: linear-gradient(145deg, #FF3B30, #FF6A5A);
 }
 
-/* Hover animado tipo iOS */
+/* Hover */
 .dock-btn:hover .dock-icon {
   transform: translateY(-4px) scale(1.08);
   box-shadow: 0 14px 34px rgba(0, 0, 0, 0.55);
@@ -235,37 +239,49 @@ body {
 /* === BOTÓN DE MÚSICA === */
 .music-btn {
   position: fixed;
-  bottom: 600px;
+  top: 20px;
   right: 20px;
-  width: 58px;
-  height: 58px;
+
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
+
+  /* Mismo color y transparencia que en computadora */
   background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(8px) saturate(180%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  /* Sombra ligera */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 4000;
+  z-index: 9999;
   transition: .25s ease;
 }
 
-#music-btn img {
-  width: 32px !important;
-  height: 32px !important;
-  opacity: .85;
-  transition: .25s ease;
+.music-btn:hover {
+  transform: scale(1.08);
+  background: rgba(255, 255, 255, 0.20);
 }
 
+/* Ícono visible en cualquier fondo */
+.music-btn img {
+  width: 30px;
+  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.6));
+}
+
+/* Rotación activa cuando hay música */
 .music-playing img {
-  animation: spin 3s linear infinite;
-  opacity: 1;
+  animation: spin 3s linear infinite !important;
 }
 
 @keyframes spin {
   from {
-    transform: rotate(0);
+    transform: rotate(0deg);
   }
 
   to {
@@ -274,16 +290,6 @@ body {
 }
 
 
-/* === TOUCH-LAYER (desbloqueo música) === */
-#touch-layer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: calc(100% - 150px);
-  background: transparent;
-  z-index: 99999;
-}
 
 
 /* === RESPONSIVE === */
@@ -315,64 +321,122 @@ body {
     width: 28px;
     height: 28px;
   }
+
+
+  @media (min-width:900px) {
+    .barra-dock {
+      bottom: 40px;
+      padding: 18px 36px;
+      gap: 38px;
+    }
+
+    .music-btn {
+      bottom: unset;
+      right: 24px;
+      top: 24px;
+
+      /* MISMO COLOR ORIGINAL, SOLO CAMBIA TAMAÑO */
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(10px) saturate(180%);
+      -webkit-backdrop-filter: blur(10px) saturate(180%);
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+      cursor: pointer;
+      z-index: 4500;
+      transition: .25s ease;
+    }
+
+    .music-btn img {
+      width: 30px !important;
+      height: 30px !important;
+      opacity: 0.95;
+      transition: .25s ease;
+    }
+
+    .music-btn:hover {
+      transform: scale(1.1);
+      background: rgba(255, 255, 255, 0.20);
+    }
+
+    .dock-btn {
+      width: 80px;
+      font-size: .85rem;
+    }
+
+    .dock-icon {
+      width: 66px;
+      height: 66px;
+    }
+
+    .dock-icon img {
+      width: 38px;
+      height: 38px;
+    }
+  }
 }
 
-@media (min-width:900px) {
-  .barra-dock {
-    bottom: 40px;
-    padding: 18px 36px;
-    gap: 38px;
+/* === BOTÓN GRANDE INICIAL DE MÚSICA === */
+/* === BOTÓN GRANDE INICIAL DE MÚSICA (SOLO INDEX) === */
+/* === BOTÓN GRANDE INICIAL DE MÚSICA (SOLO INDEX) === */
+.big-music-init {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: 18px;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  z-index: 10000;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  animation: pulse-gentle 2s ease-in-out infinite;
+}
+
+.big-music-init:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
+}
+
+.big-music-icon {
+  font-size: 1.8rem;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.big-music-init.hidden {
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
+}
+
+@keyframes pulse-gentle {
+
+  0%,
+  100% {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
   }
 
-  .music-btn {
-    bottom: unset;
-    /* delete mobile position */
-    right: 24px;
-    top: 24px;
-    /* posición superior */
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(10px) saturate(180%);
-    -webkit-backdrop-filter: blur(10px) saturate(180%);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
-    cursor: pointer;
-    z-index: 4500;
-    transition: .25s ease;
-  }
-
-  .music-btn img {
-    width: 26px !important;
-    height: 26px !important;
-    opacity: 0.95;
-    transition: .25s ease;
-  }
-
-  .music-btn:hover {
-    transform: scale(1.1);
-    background: rgba(255, 255, 255, 0.20);
-  }
-
-  .dock-btn {
-    width: 80px;
-    font-size: .85rem;
-  }
-
-  .dock-icon {
-    width: 66px;
-    height: 66px;
-  }
-
-  .dock-icon img {
-    width: 38px;
-    height: 38px;
+  50% {
+    box-shadow: 0 12px 35px rgba(255, 255, 255, 0.1);
   }
 }

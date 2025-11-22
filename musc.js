@@ -1,5 +1,5 @@
 /* ==========================================
-   musc.js — Música sincronizada entre páginas
+   musc.js — Música con botón grande solo en index
    ========================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -7,13 +7,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const audio = document.getElementById("bg-music");
   const btn = document.getElementById("music-btn");
   const icon = document.getElementById("music-icon");
-  const touchLayer = document.getElementById("touch-layer");
+  const bigMusicBtn = document.getElementById("big-music-init");
 
   if (!audio || !btn || !icon) return;
 
   audio.volume = 0.35;
-
-  let userInteracted = false;
   let isPlaying = false;
 
   /* ----------------------------------------
@@ -21,78 +19,86 @@ document.addEventListener("DOMContentLoaded", () => {
   ---------------------------------------- */
   const savedTime = localStorage.getItem("music-time");
   const savedState = localStorage.getItem("music-state");
-  let unlocked = localStorage.getItem("music-unlocked");
+  const musicActivated = localStorage.getItem("music-activated");
 
   if (savedTime) audio.currentTime = parseFloat(savedTime);
 
-  if (savedState === "playing") {
-    isPlaying = true;
-    icon.src = "logos/musica_off.png";
-    btn.classList.remove("music-playing");
-  }
+  // ==============================================
+  // COMPORTAMIENTO PARA INDEX.HTML (con botón grande)
+  // ==============================================
+  if (bigMusicBtn) {
+    // Si la música ya fue activada antes, ocultar el botón grande y mostrar el pequeño
+    if (musicActivated === "true") {
+      bigMusicBtn.classList.add('hidden');
+      btn.classList.remove('hidden');
 
-  /* ----------------------------------------
-     Si estaba desbloqueado antes → autoplay real
-  ---------------------------------------- */
-  if (isPlaying && unlocked === "true") {
-    audio.play().then(() => {
-      icon.src = "logos/musica_on.png";
-      btn.classList.add("music-playing");
-      if (touchLayer) touchLayer.style.display = "none";
-    }).catch(() => { });
-  }
-
-  /* ======================================================
-     UNLOCK AUDIO — Funciona en móviles con cualquier toque
-  ====================================================== */
-  function unlockAudio() {
-    if (!userInteracted) {
-      userInteracted = true;
-      unlocked = "true";
-      localStorage.setItem("music-unlocked", "true");
-
-      if (isPlaying) {
-        audio.play().then(() => {
-          icon.src = "logos/musica_on.png";
-          btn.classList.add("music-playing");
-        }).catch(() => { });
-      }
-
-      if (touchLayer) touchLayer.style.display = "none";
-
-      window.removeEventListener("touchstart", unlockAudio);
-      window.removeEventListener("click", unlockAudio);
-    }
-  }
-
-  window.addEventListener("touchstart", unlockAudio, { once: true });
-  window.addEventListener("click", unlockAudio, { once: true });
-
-
-  /* ======================================================
-     BOTÓN PLAY / PAUSE — FIX DEFINITIVO
-  ====================================================== */
-  btn.addEventListener("click", (event) => {
-
-    event.stopPropagation();          // Evita activar unlock sin querer
-    userInteracted = true;
-    localStorage.setItem("music-unlocked", "true");
-
-    // Si aún no está desbloqueado → desbloquear primero
-    if (!unlocked || unlocked === "false") {
-      unlocked = "true";
-      localStorage.setItem("music-unlocked", "true");
-
-      audio.play().then(() => {
+      if (savedState === "playing") {
         isPlaying = true;
         icon.src = "logos/musica_on.png";
         btn.classList.add("music-playing");
-        if (touchLayer) touchLayer.style.display = "none";
-      }).catch(() => { });
-      return;
+        audio.play().catch(() => { });
+      }
+    } else {
+      // Primera vez: mostrar solo el botón grande
+      btn.classList.add('hidden');
     }
 
-    // Toggle normal
+    /* ======================================================
+       BOTÓN GRANDE INICIAL - Activar música por primera vez
+    ====================================================== */
+    bigMusicBtn.addEventListener("click", () => {
+      // Marcar como activado
+      localStorage.setItem("music-activated", "true");
+      localStorage.setItem("music-unlocked", "true");
+
+      // Reproducir música
+      audio.play().then(() => {
+        isPlaying = true;
+        localStorage.setItem("music-state", "playing");
+
+        // Animación de despedida del botón grande
+        bigMusicBtn.style.transition = "all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+        bigMusicBtn.style.opacity = "0";
+        bigMusicBtn.style.transform = "translate(-50%, -50%) scale(0.5)";
+
+        setTimeout(() => {
+          bigMusicBtn.classList.add('hidden');
+
+          // Mostrar botón pequeño con animación
+          btn.classList.remove('hidden');
+
+          // Actualizar icono
+          icon.src = "logos/musica_on.png";
+          btn.classList.add("music-playing");
+        }, 400);
+
+      }).catch((error) => {
+        console.error("Error al reproducir música:", error);
+      });
+    });
+
+  }
+  // ==============================================
+  // COMPORTAMIENTO PARA OTRAS PÁGINAS (sin botón grande)
+  // ==============================================
+  else {
+    // En otras páginas, mostrar el botón pequeño directamente
+    btn.classList.remove('hidden');
+
+    if (savedState === "playing") {
+      isPlaying = true;
+      icon.src = "logos/musica_on.png";
+      btn.classList.add("music-playing");
+      audio.play().catch(() => { });
+    }
+  }
+
+  /* ======================================================
+     BOTÓN PEQUEÑO - Play / Pause normal (funciona en todas las páginas)
+  ====================================================== */
+  btn.addEventListener("click", (event) => {
+    event.stopPropagation();
+
     if (isPlaying) {
       audio.pause();
       isPlaying = false;
@@ -108,7 +114,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-
   /* ----------------------------------------
      Guardar tiempo de reproducción
   ---------------------------------------- */
@@ -118,7 +123,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }, 350);
 
-
   /* ----------------------------------------
      Repetir automáticamente
   ---------------------------------------- */
@@ -126,7 +130,6 @@ document.addEventListener("DOMContentLoaded", () => {
     audio.currentTime = 0;
     audio.play().catch(() => { });
   });
-
 
   /* ======================================================
      FADE OUT al cambiar de página

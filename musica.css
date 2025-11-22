@@ -3,26 +3,31 @@
  ******************************************/
 .activar-musica {
   position: fixed;
-  top: 22%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0,0,0,0.65);
-  color: #fff;
-  padding: 16px 26px;
-  border-radius: 14px;
-  font-size: 1.05rem;
-  font-weight: 700;
-  text-align: center;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.45);
-  z-index: 999999;
+  bottom: 600px;
+  right: 20px;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px) saturate(180%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  transition: transform .18s ease, opacity .22s ease;
+  z-index: 4000;
+  transition: .25s ease;
 }
 
-.activar-musica:active { transform: translateX(-50%) scale(.97); }
-.activar-musica.hidden { opacity:0; pointer-events:none; transform:translateX(-50%) translateY(-8px) scale(.98); }
+.activar-musica:active {
+  transform: translateX(-50%) scale(.97);
+}
+
+.activar-musica.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(-8px) scale(.98);
+}
 
 /******************************************
  * BOTÓN FLOTANTE DE MÚSICA
@@ -34,8 +39,8 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.10);
-  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -45,13 +50,22 @@
   transition: transform .18s ease;
 }
 
-.music-btn:hover { transform: scale(1.07); }
+.music-btn:hover {
+  transform: scale(1.07);
+}
 
-.music-playing img { animation: spin 3s linear infinite; }
+.music-playing img {
+  animation: spin 3s linear infinite;
+}
 
 @keyframes spin {
-  from { transform: rotate(0); }
-  to   { transform: rotate(360deg); }
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /******************************************
@@ -64,10 +78,10 @@
   width: 180px;
   padding: 14px;
   border-radius: 16px;
-  background: rgba(0,0,0,0.75);
+  background: rgba(0, 0, 0, 0.75);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 12px 25px rgba(0,0,0,0.4);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
   display: none;
   flex-direction: column;
   gap: 10px;
@@ -92,8 +106,8 @@
 }
 
 .song-btn {
-  background: rgba(255,255,255,0.20);
-  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255, 255, 255, 0.20);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   padding: 9px;
   border-radius: 10px;
   cursor: pointer;
@@ -102,18 +116,29 @@
   transition: .20s ease;
 }
 
-.song-btn:hover { background: rgba(255,255,255,0.30); transform: scale(1.03); }
+.song-btn:hover {
+  background: rgba(255, 255, 255, 0.30);
+  transform: scale(1.03);
+}
 
 /******************************************
  * RESPONSIVE
  ******************************************/
-@media (max-width:480px){
+@media (max-width:480px) {
   .music-btn {
     width: 55px;
     height: 55px;
     top: 14px;
     right: 12px;
   }
-  .music-panel { right: 12px; width: 170px; }
-  .activar-musica { top: 26%; font-size:1rem; }
+
+  .music-panel {
+    right: 12px;
+    width: 170px;
+  }
+
+  .activar-musica {
+    top: 26%;
+    font-size: 1rem;
+  }
 }
