@@ -5,104 +5,101 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Invitación Familiar</title>
-  <link rel="stylesheet" href="styel.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/x-icon" href="logos/favicon.ico">
 </head>
 
 <body>
-  <!-- === BOTÓN GRANDE INICIAL DE MÚSICA (SOLO INDEX) === -->
+  <!-- Botón grande inicial de música -->
   <div id="big-music-init" class="big-music-init">
     <div class="big-music-icon">🎵</div>
-    <span>Música</span>
+    <span>Activar Música</span>
   </div>
 
-  <!-- === HERO / CARRUSEL === -->
-  <header class="hero">
-    <div class="carousel">
-
-      <!-- IMAGEN 1 -->
-      <picture>
-        <source srcset="img_familia/Fimagen_movil1.jpg" media="(max-width: 768px)">
-        <source srcset="img_familia/Fimagen_pc1.jpg" media="(min-width: 769px)">
-        <img src="img_familia/Fimagen_pc1.jpg" class="fade-slide active" alt="Familia 1">
-      </picture>
-
-      <!-- IMAGEN 2 -->
-      <picture>
-        <source srcset="img/img2.jpg" media="(max-width: 768px)">
-        <source srcset="img_familia/Fimagen_pc2.jpg" media="(min-width: 769px)">
-        <img src="img_familia/Fimagen_pc2.jpg" class="fade-slide" alt="Familia 2">
-      </picture>
-
-      <!-- IMAGEN 3 -->
-      <picture>
-        <source srcset="img/img1.jpg" media="(max-width: 768px)">
-        <source srcset="img_familia/Fimagen_pc3.jpg" media="(min-width: 769px)">
-        <img src="img_familia/Fimagen_pc3.jpg" class="fade-slide" alt="Familia 3">
-      </picture>
-
-    </div>
-
-    <div class="overlay"></div>
-
-    <div class="hero-text">
-      <h1></h1> <!-- JS inserta el texto dinámico -->
-    </div>
-
-  </header>
-
-
-  <!-- === BARRA DOCK ESTILO iPHONE 16 === -->
-  <div class="barra-dock">
-
-    <!-- Recuerdos -->
-    <a class="dock-btn" href="fotos.html">
-      <div class="dock-icon fotos">
-        <img src="logos/Galeria.png" alt="Recuerdos">
-      </div>
-      <span>Recuerdos</span>
-    </a>
-
-    <!-- Comida -->
-    <a class="dock-btn" href="comida.html">
-      <div class="dock-icon comida">
-        <img src="logos/comida.png" alt="Comida">
-      </div>
-      <span>Comida</span>
-    </a>
-
-    <!-- Ubicación -->
-    <a class="dock-btn" href="https://maps.app.goo.gl/gshY7yg1HGjy24a77" target="_blank">
-      <div class="dock-icon ubicacion">
-        <img src="logos/maps.png" alt="Ubicación">
-      </div>
-      <span>Ubicación</span>
-    </a>
-
-    <!-- Confirmar -->
-    <a class="dock-btn" href="https://wa.me/59174410249?text=Hola!%20👋%20Confirmo%20mi%20asistencia" target="_blank">
-      <div class="dock-icon confirmar">
-        <img src="logos/whatsapp.png" alt="Confirmar">
-      </div>
-      <span>Confirmar</span>
-    </a>
-
-  </div>
-
-
-  <!-- Botón de música (oculto inicialmente en index) -->
+  <!-- Botón de música pequeño -->
   <div id="music-btn" class="music-btn hidden">
     <img id="music-icon" src="logos/musica_off.png" alt="Music">
   </div>
 
-  <!-- AUDIO GLOBAL -->
-  <audio id="bg-music" preload="auto">
+  <!-- Contenedor principal de la SPA -->
+  <div id="app">
+    <!-- Página de INICIO -->
+    <div id="home-page" class="page active">
+      <header class="hero">
+        <div class="carousel">
+          <picture>
+            <source srcset="img_familia/Fimagen_movil1.jpg" media="(max-width: 768px)">
+            <source srcset="img_familia/Fimagen_pc1.jpg" media="(min-width: 769px)">
+            <img src="img_familia/Fimagen_pc1.jpg" class="fade-slide active" alt="Familia 1">
+          </picture>
+
+          <picture>
+            <source srcset="img/img2.jpg" media="(max-width: 768px)">
+            <source srcset="img_familia/Fimagen_pc2.jpg" media="(min-width: 769px)">
+            <img src="img_familia/Fimagen_pc2.jpg" class="fade-slide" alt="Familia 2">
+          </picture>
+
+          <picture>
+            <source srcset="img/img1.jpg" media="(max-width: 768px)">
+            <source srcset="img_familia/Fimagen_pc3.jpg" media="(min-width: 769px)">
+            <img src="img_familia/Fimagen_pc3.jpg" class="fade-slide" alt="Familia 3">
+          </picture>
+        </div>
+
+        <div class="overlay"></div>
+
+        <div class="hero-text">
+          <h1></h1>
+        </div>
+      </header>
+
+      <!-- BARRA DOCK -->
+      <div class="barra-dock">
+        <a class="dock-btn" href="#fotos" data-page="fotos">
+          <div class="dock-icon fotos">
+            <img src="logos/Galeria.png" alt="Recuerdos">
+          </div>
+          <span>Recuerdos</span>
+        </a>
+
+        <a class="dock-btn" href="#comida" data-page="comida">
+          <div class="dock-icon comida">
+            <img src="logos/comida.png" alt="Comida">
+          </div>
+          <span>Comida</span>
+        </a>
+
+        <a class="dock-btn" href="https://maps.app.goo.gl/gshY7yg1HGjy24a77" target="_blank">
+          <div class="dock-icon ubicacion">
+            <img src="logos/maps.png" alt="Ubicación">
+          </div>
+          <span>Ubicación</span>
+        </a>
+
+        <a class="dock-btn" href="https://wa.me/59174410249?text=Hola!%20👋%20Confirmo%20mi%20asistencia"
+          target="_blank">
+          <div class="dock-icon confirmar">
+            <img src="logos/whatsapp.png" alt="Confirmar">
+          </div>
+          <span>Confirmar</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Página de FOTOS -->
+    <div id="fotos-page" class="page"></div>
+
+    <!-- Página de COMIDA -->
+    <div id="comida-page" class="page"></div>
+  </div>
+
+  <!-- AUDIO -->
+  <audio id="bg-music" loop preload="auto">
     <source src="musica/music_necesito_un_vino.mp3" type="audio/mpeg">
+    <source src="musica/music_necesito_un_vino.ogg" type="audio/ogg">
   </audio>
 
-  <!-- Scripts -->
-  <script src="musc.js"></script>
-  <script src="scrip.js"></script>
-
+  <script src="script.js"></script>
 </body>
 
 </html>

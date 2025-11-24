@@ -1,0 +1,748 @@
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: #000;
+  color: #fff;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* === ESTILOS SPA === */
+#app {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.page {
+  display: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  min-height: 100vh;
+}
+
+.page.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* === HOME PAGE - ESTILO ORIGINAL MEJORADO === */
+#home-page {
+  background: #000;
+  color: #fff;
+}
+
+#home-page .hero {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#home-page .carousel {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+#home-page .fade-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+#home-page .fade-slide.active {
+  opacity: 1;
+}
+
+#home-page .overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+      rgba(0, 0, 0, 0.6) 0%,
+      rgba(0, 0, 0, 0.4) 50%,
+      rgba(0, 0, 0, 0.6) 100%);
+  z-index: 1;
+}
+
+#home-page .hero-text {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 2;
+  width: 90%;
+  max-width: 600px;
+}
+
+#home-page .hero-text h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  margin: 0 0 10px;
+  line-height: 1.2;
+}
+
+#home-page .mensaje-arriba {
+  margin-bottom: 15px;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+#home-page .mensaje-carrusel {
+  margin-top: 15px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  opacity: 0;
+  transform: translateY(8px);
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+#home-page .fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#home-page .fade-out {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+#home-page .mensaje-final {
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-shadow: 0 3px 15px rgba(0, 0, 0, 0.7);
+  animation: gentle-glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes gentle-glow {
+  from {
+    text-shadow: 0 3px 15px rgba(0, 0, 0, 0.7);
+  }
+
+  to {
+    text-shadow: 0 3px 20px rgba(255, 255, 255, 0.3);
+  }
+}
+
+/* BARRA DOCK MEJORADA PARA MÓVIL */
+#home-page .barra-dock {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 20px;
+  padding: 16px 24px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  z-index: 3000;
+  width: fit-content;
+  max-width: 90vw;
+}
+
+#home-page .dock-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 500;
+  width: 60px;
+}
+
+#home-page .dock-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.25s ease;
+}
+
+#home-page .dock-icon img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  filter: brightness(0.9);
+}
+
+#home-page .dock-icon.fotos {
+  background: linear-gradient(135deg, #FF8A00, #FFB548);
+}
+
+#home-page .dock-icon.ubicacion {
+  background: linear-gradient(135deg, #0A84FF, #005BEA);
+}
+
+#home-page .dock-icon.confirmar {
+  background: linear-gradient(135deg, #28D146, #22A63F);
+}
+
+#home-page .dock-icon.comida {
+  background: linear-gradient(135deg, #FF3B30, #FF6A5A);
+}
+
+#home-page .dock-btn:hover .dock-icon,
+#home-page .dock-btn:active .dock-icon {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* === BOTONES GLOBALES MEJORADOS === */
+.big-music-init {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  z-index: 10000;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.big-music-init:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: scale(1.05);
+}
+
+.big-music-icon {
+  font-size: 1.4rem;
+}
+
+.big-music-init.hidden {
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
+}
+
+.music-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 9999;
+  transition: all 0.25s ease;
+}
+
+.music-btn:hover {
+  transform: scale(1.08);
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.music-btn img {
+  width: 24px;
+}
+
+.music-playing img {
+  animation: spin 3s linear infinite !important;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* === BOTÓN VOLVER MEJORADO === */
+.btn-volver {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  z-index: 9999;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-volver:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* === PÁGINA FOTOS - MEJORADA PARA RECUERDOS === */
+#fotos-page {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2a2a2a 100%);
+  color: #fff;
+  min-height: 100vh;
+}
+
+#fotos-page .galeria-content {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#fotos-page .hero {
+  position: relative;
+  height: 40vh;
+  min-height: 300px;
+  background-image: url('img_familia/Fimagen_pc2.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+#fotos-page .hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+#fotos-page .hero-text {
+  position: relative;
+  z-index: 2;
+  max-width: 90%;
+  padding: 0 20px;
+}
+
+#fotos-page .hero-text h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 10px;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+#fotos-page .hero-text p {
+  font-size: 1rem;
+  opacity: 0.9;
+  margin-bottom: 15px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+#fotos-page .galeria {
+  padding: 40px 15px 60px;
+  text-align: center;
+}
+
+#fotos-page .galeria h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 30px;
+  color: #fff;
+  position: relative;
+  display: inline-block;
+}
+
+#fotos-page .galeria h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(135deg, #FF8A00, #FFB548);
+  border-radius: 2px;
+}
+
+#fotos-page .fotos-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* 2 columnas fijas en móvil */
+  gap: 12px;
+  justify-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+#fotos-page .fotos-grid img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  border: 2px solid transparent;
+  filter: brightness(0.9);
+}
+
+#fotos-page .fotos-grid img:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  border-color: #FF8A00;
+  filter: brightness(1);
+  z-index: 10;
+}
+
+#fotos-page footer {
+  text-align: center;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 30px 20px;
+  color: #fff;
+  font-size: 1rem;
+  margin-top: 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#fotos-page footer p {
+  margin: 0;
+  opacity: 0.8;
+}
+
+/* === PÁGINA COMIDA - SIN CAMBIOS (MANTENIENDO ESTILO ACTUAL) === */
+#comida-page {
+  background: #e9d8c4;
+  color: #333;
+  font-family: "Quicksand", sans-serif;
+}
+
+#comida-page .hero {
+  position: relative;
+  height: 48vh;
+  background: url('comida/chancho1.jpg') center/cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#comida-page .hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+#comida-page .hero-text {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  color: #fff;
+  padding: 0 20px;
+}
+
+#comida-page .hero-text h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+#comida-page .hero-text p {
+  margin-top: 6px;
+  font-size: 1.1rem;
+  opacity: 0.95;
+}
+
+#comida-page .comida {
+  padding: 50px 20px 80px;
+  text-align: center;
+}
+
+#comida-page .comida h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #d47f2f;
+  margin: 32px 0 22px;
+}
+
+#comida-page .desayuno-fotos,
+#comida-page .almuerzo-fotos,
+#comida-page .bebidas-fotos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 22px;
+  margin-bottom: 28px;
+}
+
+#comida-page .desayuno-fotos img,
+#comida-page .almuerzo-fotos img,
+#comida-page .bebidas-fotos img {
+  width: 100%;
+  max-width: 380px;
+  border-radius: 16px;
+  object-fit: cover;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+#comida-page .desayuno-fotos img:hover,
+#comida-page .almuerzo-fotos img:hover,
+#comida-page .bebidas-fotos img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+@media (min-width: 1400px) {
+  #fotos-page .fotos-grid {
+    grid-template-columns: repeat(5, 1fr);
+    /* 5 columnas en pantallas grandes */
+    gap: 25px;
+  }
+
+  #fotos-page .fotos-grid img {
+    height: 280px;
+    /* Aún más grandes */
+  }
+}
+
+@media (max-width: 768px) {
+  #home-page .hero-text h1 {
+    font-size: 1.8rem;
+  }
+
+  #home-page .mensaje-carrusel,
+  #home-page .mensaje-final {
+    font-size: 1.1rem;
+  }
+
+  #home-page .barra-dock {
+    gap: 15px;
+    padding: 14px 20px;
+    bottom: 15px;
+  }
+
+  #home-page .dock-btn {
+    width: 55px;
+  }
+
+  #home-page .dock-icon {
+    width: 45px;
+    height: 45px;
+  }
+
+  #home-page .dock-icon img {
+    width: 20px;
+    height: 20px;
+  }
+
+  #fotos-page .hero {
+    height: 50vh;
+    /* Aumentamos la altura en móviles */
+    min-height: 400px;
+    background-position: center 25%;
+    /* Ajustamos la posición para mostrar más parte de la imagen */
+  }
+
+  #fotos-page .hero-text h1 {
+    font-size: 1.6rem;
+  }
+
+  #fotos-page .fotos-grid {
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 columnas en tablet */
+    gap: 15px;
+  }
+
+  #fotos-page .fotos-grid img {
+    height: 200px;
+  }
+
+
+
+
+  .btn-volver,
+  .big-music-init,
+  .music-btn {
+    top: 15px;
+    left: 15px;
+  }
+
+  .music-btn {
+    right: 15px;
+  }
+
+  .btn-volver {
+    padding: 8px 14px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #home-page .hero-text {
+    top: 40%;
+  }
+
+  #home-page .hero-text h1 {
+    font-size: 1.6rem;
+  }
+
+  #home-page .mensaje-arriba {
+    font-size: 0.9rem;
+  }
+
+  #home-page .barra-dock {
+    gap: 12px;
+    padding: 12px 16px;
+    bottom: 12px;
+  }
+
+  #home-page .dock-btn {
+    width: 50px;
+    font-size: 0.7rem;
+  }
+
+  #home-page .dock-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  #home-page .dock-icon img {
+    width: 18px;
+    height: 18px;
+  }
+
+  #fotos-page .fotos-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  #fotos-page .fotos-grid img {
+    height: 140px;
+  }
+
+  #fotos-page .galeria h2 {
+    font-size: 1.5rem;
+  }
+
+  #fotos-page .hero {
+    height: 60vh;
+    /* Aún más alto en pantallas pequeñas */
+    min-height: 450px;
+    background-position: center 30%;
+  }
+
+}
+
+/* Mejoras específicas para Android */
+@media (max-width: 360px) {
+  #home-page .barra-dock {
+    gap: 8px;
+    padding: 10px 14px;
+  }
+
+  #home-page .dock-btn {
+    width: 45px;
+    font-size: 0.65rem;
+  }
+
+  #home-page .dock-icon {
+    width: 35px;
+    height: 35px;
+  }
+
+  #fotos-page .fotos-grid img {
+    height: 120px;
+  }
+}
+
+@media (hover: hover) {
+  #fotos-page .fotos-grid img:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    border-color: #FF8A00;
+    filter: brightness(1);
+    z-index: 10;
+  }
+}
+
+#fotos-page .fotos-grid img:active {
+  transform: scale(0.95);
+}
+
+/* Ajustes específicos para móviles muy pequeños */
+@media (max-width: 360px) {
+  #fotos-page .fotos-grid {
+    gap: 8px;
+  }
+
+  #fotos-page .fotos-grid img {
+    height: 160px;
+  }
+}

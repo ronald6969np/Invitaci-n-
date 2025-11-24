@@ -1,45 +1,17 @@
-<!DOCTYPE html>
-<html lang="es">
+<div class="comida-content">
+  <a href="#" class="btn-volver" data-page="home">
+    <span>‹</span> Inicio
+  </a>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Comida Especial</title>
-  <link rel="stylesheet" href="styleComida.css?v=3">
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
-
-
-</head>
-
-<body>
-
-
-
-  <!-- Botón de música -->
-  <div id="music-btn" class="music-btn">
-    <img id="music-icon" src="logos/musica_off.png" alt="Music">
-  </div>
-
-  <!-- Música global -->
-  <audio id="bg-music" preload="auto">
-    <source src="musica/music_necesito_un_vino.mp3" type="audio/mpeg">
-  </audio>
-
-  <!-- HERO -->
   <header class="hero">
     <div class="overlay"></div>
     <div class="hero-text">
       <h1>🍽️ Nuestra Comida Especial</h1>
       <p>Lo preparamos con mucho cariño para ustedes</p>
-
-      <!-- Botón volver -->
-      <a href="index.html" class="btn-volver">⬅ Volver</a>
     </div>
   </header>
 
-  <!-- SECCIÓN COMIDA -->
   <section class="comida">
-
     <h2>Merienda</h2>
     <div class="desayuno-fotos">
       <img src="comida/tucumana1.jpg" alt="Merienda 1">
@@ -56,18 +28,5 @@
     <div class="bebidas-fotos">
       <img src="comida/vino1.jpg" alt="Bebida 1">
     </div>
-
   </section>
-
-  <!-- LIGHTBOX -->
-  <div id="lightbox" class="lightbox">
-    <span class="cerrar">&times;</span>
-    <img class="lightbox-img" src="" alt="Imagen ampliada">
-  </div>
-
-  <script src="lightbox.js"></script>
-  <script src="musc.js"></script>
-
-</body>
-
-</html>
+</div>
