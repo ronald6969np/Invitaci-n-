@@ -10,17 +10,25 @@
 </head>
 
 <body>
-  <!-- Botón grande inicial de música -->
-  <div id="big-music-init" class="big-music-init">
-    <div class="big-music-icon">🎵</div>
-    <span>Activar Música</span>
+ <!-- Botón grande inicial de música (SOLO ICONO) -->
+<div id="big-music-init" class="big-music-init">
+  <img src="logos/big-btn2.png" alt="Activar Música" class="big-music-icon">
+</div>
   </div>
 
   <!-- Botón de música pequeño -->
   <div id="music-btn" class="music-btn hidden">
     <img id="music-icon" src="logos/musica_off.png" alt="Music">
   </div>
-
+<!-- Modal para comida -->
+<div class="modal-overlay" id="comida-modal-overlay" style="display: none;">
+  <div class="modal-content">
+    <button class="close-modal" id="close-comida-modal">
+      <img src="logos/salida.png" alt="Cerrar" class="close-icon">
+    </button>
+    <img id="comida-modal-image" src="" alt="Imagen ampliada">
+  </div>
+</div>
   <!-- Contenedor principal de la SPA -->
   <div id="app">
     <!-- Página de INICIO -->
@@ -98,6 +106,14 @@
     <source src="musica/music_necesito_un_vino.mp3" type="audio/mpeg">
     <source src="musica/music_necesito_un_vino.ogg" type="audio/ogg">
   </audio>
+<div class="modal-overlay" id="modal-overlay" style="display: none;">
+  <div class="modal-content">
+    <button class="close-modal" id="close-modal">
+      <img src="logos/salida.png" alt="Cerrar" class="close-icon">
+    </button>
+    <img id="modal-image" src="" alt="Imagen ampliada">
+  </div>
+</div>
 
   <script src="script.js"></script>
 </body>

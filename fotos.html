@@ -8,57 +8,35 @@
   <header class="hero">
     <div class="hero-overlay"></div>
     <div class="hero-text">
-      <h1>📸 Recuerdos Familiares</h1>
-      <p>Momentos especiales que queremos compartir contigo</p>
+      <h1>🌟 Recuerdos</h1>
+      <p>Toca cualquier imagen</p>
     </div>
   </header>
 
-  <section class="galeria">
-    <h2>Nuestros Momentos Inolvidables</h2>
-    <div class="fotos-grid">
-      <img src="img_familia/Fimagen_pc1.jpg" alt="Recuerdo familiar 1" loading="lazy">
-      <img src="img_familia/Fimagen_pc2.jpg" alt="Recuerdo familiar 2" loading="lazy">
-      <img src="img_familia/Fimagen_pc3.jpg" alt="Recuerdo familiar 3" loading="lazy">
-      <img src="img_albaro/Aimagen1.jpg" alt="Recuerdo de Álvaro 1" loading="lazy">
-      <img src="img_albaro/Aimagen2.jpg" alt="Recuerdo de Álvaro 2" loading="lazy">
-      <img src="img_albaro/Aimagen3.jpg" alt="Recuerdo de Álvaro 3" loading="lazy">
-      <img src="imgenes_saul/Simagen4.jpg" alt="Recuerdo de Saúl 1" loading="lazy">
-      <img src="imgenes_saul/Simagen5.jpg" alt="Recuerdo de Saúl 2" loading="lazy">
-      <img src="imgenes_saul/Simagen6.jpg" alt="Recuerdo de Saúl 3" loading="lazy">
+  <!-- Galería 3D -->
+  <section class="galeria-3d">
+    <div class="sphere-container">
+      <div class="sphere" id="sphere"></div>
     </div>
-  </section>
-
-  <footer>
-    <p>Con cariño, la familia Calizaya Aldana 💕</p>
-  </footer>
+    
+    <div class="mobile-controls">
+      <button class="control-btn" id="reset-view">
+        <img src="logos/reini.png" alt="Reiniciar" class="control-icon">
+      </button>
+      <button class="control-btn" id="auto-rotate">
+        <img src="logos/pausa.png" alt="Pausar" class="control-icon">
+      </button>
+    </div>
+  </section>  
 </div>
 
-<script>
-  // Efecto de partículas para el fondo
-  document.addEventListener('DOMContentLoaded', function () {
-    const particlesContainer = document.getElementById('particles');
-    const particleCount = 30;
-
-    for (let i = 0; i < particleCount; i++) {
-      const particle = document.createElement('div');
-      particle.classList.add('particle');
-
-      // Posición aleatoria
-      particle.style.left = Math.random() * 100 + 'vw';
-      particle.style.top = Math.random() * 100 + 'vh';
-
-      // Tamaño aleatorio
-      const size = Math.random() * 3 + 2;
-      particle.style.width = size + 'px';
-      particle.style.height = size + 'px';
-
-      // Retraso de animación aleatorio
-      particle.style.animationDelay = Math.random() * 6 + 's';
-
-      // Opacidad aleatoria
-      particle.style.opacity = Math.random() * 0.7 + 0.3;
-
-      particlesContainer.appendChild(particle);
-    }
-  });
-</script>
+<!-- Modal para galería (SOLO UNO, EL DE INDEX.HTML ES SUFICIENTE) -->
+<!-- Modal para galería -->
+<div class="modal-overlay" id="modal-overlay" style="display: none;">
+  <div class="modal-content">
+    <button class="close-modal" id="close-modal">
+      <img src="logos/salida.png" alt="Cerrar" class="close-icon">
+    </button>
+    <img id="modal-image" src="" alt="Imagen ampliada">
+  </div>
+</div>
