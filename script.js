@@ -1,5 +1,63 @@
+// ========== CONTADOR REGRESIVO MEJORADO ==========
+function startCountdown() {
+  const countdownElement = document.getElementById('countdown');
+  if (!countdownElement) return;
+
+  function updateCountdown() {
+    // Cambiar esta fecha por la de tu evento
+    const eventDate = new Date('December 27, 2025 09:00:00').getTime();
+    const now = new Date().getTime();
+    const distance = eventDate - now;
+
+    if (distance < 0) {
+      // El evento ya pasó - mensaje mejorado
+      countdownElement.innerHTML = `
+        <div class="countdown-finished">
+           ¡La reunion está en marcha! 
+          <div style="font-size: 0.9rem; margin-top: 8px; opacity: 0.9;">
+             Únete  
+          </div>
+        </div>
+      `;
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Formato mejorado con ceros a la izquierda
+    countdownElement.innerHTML = `
+      <div class="countdown-item">
+        <span class="countdown-number">${days}</span>
+        <span class="countdown-label">Días</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-number">${hours.toString().padStart(2, '0')}</span>
+        <span class="countdown-label">Horas</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-number">${minutes.toString().padStart(2, '0')}</span>
+        <span class="countdown-label">Minutos</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-number">${seconds.toString().padStart(2, '0')}</span>
+        <span class="countdown-label">Segundos</span>
+      </div>
+    `;
+  }
+
+  // Actualizar inmediatamente y luego cada segundo
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+}
+
 // ========== CARRUSEL HOME ==========
 document.addEventListener('DOMContentLoaded', () => {
+  // Iniciar el contador regresivo automáticamente
+  startCountdown();
+  
   const slides = Array.from(document.querySelectorAll('.fade-slide'));
   const heroText = document.querySelector('.hero-text');
 
@@ -63,8 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(tick, 4000);
   }
 
-  // ========== MÚSICA ==========
- // ========== MÚSICA SIMPLIFICADA PARA SPA ==========
+  // ========== MÚSICA SIMPLIFICADA PARA SPA ==========
 const audio = document.getElementById("bg-music");
 const btn = document.getElementById("music-btn");
 const icon = document.getElementById("music-icon");
@@ -400,7 +457,10 @@ initializeMusicSystem();
       'imgenes_saul/Simagen4.jpg',
       'imgenes_saul/Simagen5.jpg',
       'imgenes_saul/Simagen6.jpg',
-      
+      'img/img1.jpg',
+      'img/img2.jpg',
+      'img/img3.jpg',
+      'img/imgAbuelos.jpg',
     ];
 
     let currentRotation = { x: 0, y: 0 };
@@ -412,7 +472,7 @@ initializeMusicSystem();
     function createSphereItems() {
   sphere.innerHTML = '';
   
-  const totalItems = 75;
+  const totalItems = 78;
   const radius = 300;
   
   for (let i = 0; i < totalItems; i++) {
