@@ -5,7 +5,7 @@ function startCountdown() {
 
   function updateCountdown() {
     // Cambiar esta fecha por la de tu evento
-    const eventDate = new Date('December 27, 2025 09:00:00').getTime();
+    const eventDate = new Date('December 28, 2025 08:00:00').getTime();
     const now = new Date().getTime();
     const distance = eventDate - now;
 
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
       "Preparados para vivir un día inolvidable juntos."
     ];
 
-    const textoArriba = "Te invitamos a pasar un día inolvidable en el reencuentro familiar el 27-diciembre en nuestra casa a horas 9:00 AM";
+    const textoArriba = "Te invitamos a pasar un día inolvidable en el reencuentro familiar el 28-diciembre en nuestra casa a horas 9:00 AM";
     const textoFinal = "💖 ¡Nos reunimos de nuevo, familia Calizaya! 💖";
 
     const textoSuperior = document.createElement('p');
